@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 import matplotlib.lines as mlines
 import numpy as np
 
-grbs = pygrib.open('rawfile/gfs.2017103012')
-grb = grbs.select(name='Apparent temperature')[0]
+grbs = pygrib.open('rawfile/gfs.GFS2017103112.f024')
+grb = grbs.select(name='Maximum temperature')[0]
 maxt = grb.values.T
 lats, lons = grb.latlons()
 
@@ -52,6 +52,6 @@ cs = m.contourf(x,y,maxt - 273.15,clevs,cmap=cm.GMT_haxby)
 cbar = m.colorbar(cs,location='bottom',pad="5%")
 cbar.set_label('°C')
 # add title
-plt.title('example plot: 201703012z global 2m apparent Temprature (°C)')
+plt.title('example plot: 201703012z global 2m maximum Temprature (°C)')
 
 plt.show()

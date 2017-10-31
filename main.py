@@ -45,7 +45,10 @@ def downLoadPicFromURL(dest_dir,URL):
 
 
 #set the path of the file from GFS
-downloadhour = ['000','024','048','072','096','120']
+downloadhour = ['000','006', '012', '018', '024','030', '036', '042','048', '054', '060', '066','072', '078', '084',
+                '090','096','102', '108', '114', '120', '126', '132', '138', '144', '150', '156', '162', '168', '174',
+                '180', '186', '192', '198', '204', '210', '216', '222', '228', '234', '240']
+#reqiured download file
 total = len(downloadhour)
 count = 0
 for i in downloadhour:
