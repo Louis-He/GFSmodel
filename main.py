@@ -30,7 +30,7 @@ def decideURL(forecasthour):
 
     #http://nomads.ncep.noaa.gov/cgi-bin/filter_gfs_0p25.pl?file=gfs.t12z.pgrb2.0p25.f000&all_var=on&leftlon=0&rightlon=360&toplat=90&bottomlat=-90&dir=%2Fgfs.2017102712
 
-    result = time.strftime("%Y%m%d"+hourresult, time.localtime(nowtime))  # hour of UTC time
+    result = time.strftime("%Y%m%d", time.localtime(nowtime)) + hourresult  # hour of UTC time
     filename = result
     result = 'http://nomads.ncep.noaa.gov/cgi-bin/filter_gfs_0p25.pl?file=gfs.t'+ hourresult +'z.pgrb2.0p25.f' + forecasthour + '&all_var=on&leftlon=0&rightlon=360&toplat=90&bottomlat=-90&dir=%2Fgfs.' + result
     return [result, 'gfs.'+filename]
