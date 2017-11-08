@@ -59,7 +59,7 @@ def plot(filepath):
     # add title
     plt.title('example plot: ' + filepath + 'z global 2m maximum Temprature (°C)')
 
-    plt.save('product/' + filepath + '.png')
+    plt.savefig('product/' + filepath + '.png')
 
 path = 'rawfile/'
 files= os.listdir(path)
