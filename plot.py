@@ -67,3 +67,4 @@ print(files)
 for file in files:
     if file[0:3] == 'gfs':
         plot(file)
+        print('[Compele]')
