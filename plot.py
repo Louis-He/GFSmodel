@@ -68,5 +68,8 @@ files= os.listdir(path)
 print(files)
 for file in files:
     if file[0:3] == 'gfs':
-        plot(file)
-        print('[Compele]')
+        try:
+            plot(file)
+            print('[Compele]')
+        except:
+            print('[ERR:unknown]')
