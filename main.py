@@ -73,6 +73,6 @@ for i in downloadhour:
     print('' + str((count-1) / total * 100) + '%[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']Dowanloading file... from URL: ' + downloadinfo[0])
     path = 'rawfile/' + downloadinfo[1]
     urlretrieve(downloadinfo[0], path)
-    f = open('sysreport/downloadreport.txt', 'a+')
+    f = open('/root/GFS/sysreport/downloadreport.txt', 'a+')
     f.write('['+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60))+']' + '\t' + downloadinfo[1] + '\n')
     f.close()
