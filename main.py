@@ -4,7 +4,7 @@ import urllib.request
 from urllib.request import urlretrieve,urlopen
 import os
 
-utc = -4
+utc = -5
 
 # return the URL of the latest GFS model (4 hours after the initial)
 def decideURL(forecasthour):
@@ -34,7 +34,7 @@ def decideURL(forecasthour):
     filename = 'GFS' + result + '.f' + forecasthour
     print(filename)
     result = 'http://nomads.ncep.noaa.gov/cgi-bin/filter_gfs_0p25.pl?file=gfs.t'+ hourresult +'z.pgrb2.0p25.f' + forecasthour + '&all_var=on&leftlon=0&rightlon=360&toplat=90&bottomlat=-90&dir=%2Fgfs.' + result
-    return [result, 'gfs.'+filename]
+    return [result, 'gfs.' + filename]
 
 #定义下载函数downLoadPicFromURL（本地文件夹，网页URL）
 def downLoadPicFromURL(dest_dir,URL):
@@ -43,17 +43,36 @@ def downLoadPicFromURL(dest_dir,URL):
         except:
           print ('\tError retrieving the URL:', URL)
 
+# run at the beginning of the program
+def initialize():
+    os.system('rm -rf rawfile/')
+    print('['+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60))+']'+'Erase expired rawfile')
+    os.system('mkdir rawfile')
+    print('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Create rawfile folder')
+    print('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Start downloading file...')
+    f = open('sysreport/downloadreport.txt', 'r+')
+    f.close()
+    print('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Create system report file...')
 
-#set the path of the file from GFS
+
+#initialize the program
+initialize()
+
+
+#set the forecast hour of the file from GFS
 downloadhour = ['000','006', '012', '018', '024','030', '036', '042','048', '054', '060', '066','072', '078', '084',
                 '090','096','102', '108', '114', '120', '126', '132', '138', '144', '150', '156', '162', '168', '174',
                 '180', '186', '192', '198', '204', '210', '216', '222', '228', '234', '240']
+
 #reqiured download file
 total = len(downloadhour)
 count = 0
 for i in downloadhour:
     count += 1
     downloadinfo = decideURL(i)
-    print('[' + str((count-1)/total) + '%]Dowanloading file... from URL: ' + downloadinfo[0])
+    print('' + str((count-1) / total * 100) + '%[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']Dowanloading file... from URL: ' + downloadinfo[0])
     path = 'rawfile/' + downloadinfo[1]
     urlretrieve(downloadinfo[0], path)
+    f = open('sysreport/downloadreport.txt', 'a+')
+    f.write('['+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60))+']' + '\t' + downloadinfo[1] + '\n')
+    f.close()
