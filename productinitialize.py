@@ -57,3 +57,4 @@ def plot():
 
 initialize()
 createsh()
+plot()
