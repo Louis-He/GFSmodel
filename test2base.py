@@ -150,7 +150,7 @@ def plotWTP(file):
     plt.savefig('product/WTP/' + file + '.png', bbox_inches='tight')
 
     # delete plot for memory
-    del plt
+    plt.close(0)
 
 # run at the beginning of the program
 def initialize():
