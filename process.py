@@ -6,10 +6,10 @@ utc = 0
 def createsh():
     f = open('/root/GFS/sysreport/running.txt', 'w+')
     f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S',
-                              time.localtime(time.time() + utc * 60 * 60)) + ']' + 'System start.')
+                              time.localtime(time.time() + utc * 60 * 60)) + ']' + 'System start.\n')
     f.close()
     print('[' + time.strftime('%Y-%m-%d %H:%M:%S',
-                              time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Write script file...')
+                              time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Write script file...\n')
     f = open('/root/GFS/plot.sh', 'w+')
     f.close()
     f = open('/root/GFS/process.sh', 'w+')
@@ -20,7 +20,7 @@ def createsh():
 
 def start():
     print('[' + time.strftime('%Y-%m-%d %H:%M:%S',
-                              time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Start script.')
+                              time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Start script.\n')
     f = open('/root/GFS/sysreport/running.txt', 'a+')
     f.write(
         '[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\tStart running script.\n')

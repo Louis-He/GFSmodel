@@ -36,11 +36,11 @@ def createsh():
                     file + ' SCRIPT INITIALIZE FAILED! PLEASE CHECK\n')
                 f.close()
     print('[' + time.strftime('%Y-%m-%d %H:%M:%S',
-                              time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Script Done. Ready to run.')
+                              time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Script Done. Ready to run.\n')
 
 def start():
     print('[' + time.strftime('%Y-%m-%d %H:%M:%S',
-                              time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Start plot script.')
+                              time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Start plot script.\n')
     f = open('/root/GFS/sysreport/running.txt', 'a+')
     f.write(
         '[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\tStart running plot script.\n')
