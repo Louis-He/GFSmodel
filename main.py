@@ -52,7 +52,7 @@ def initialize():
     print('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Start downloading file...')
     f = open('/root/GFS/sysreport/downloadreport.txt', 'w+')
     f.close()
-    print('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Create system report file...')
+    print('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Create system download report file...')
 
 
 #initialize the program
@@ -77,10 +77,18 @@ for i in downloadhour:
         f = open('/root/GFS/sysreport/downloadreport.txt', 'a+')
         f.write('['+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60))+']' + '\t' + downloadinfo[1] + ' DOWNLOAD SUCCESS\n')
         f.close()
+        f = open('/root/GFS/sysreport/running.txt', 'a+')
+        f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
+                downloadinfo[1] + ' DOWNLOAD SUCCESS\n')
+        f.close()
     except:
         print('(UNEXPECTED ERR)[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(
             time.time() + utc * 60 * 60)) + ']Dowanloading file... from URL: ' + downloadinfo[1] + 'ERROR')
         f = open('/root/GFS/sysreport/downloadreport.txt', 'a+')
+        f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
+                downloadinfo[1] + ' DOWNLOAD FAILED\n')
+        f.close()
+        f = open('/root/GFS/sysreport/running.txt', 'a+')
         f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
                 downloadinfo[1] + ' DOWNLOAD FAILED\n')
         f.close()

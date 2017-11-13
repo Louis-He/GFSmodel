@@ -179,7 +179,7 @@ skip=False
 for i in range(1,nargs):
    if not skip:
       arg=sys.argv[i]
-      print ("INFO: processing",arg)
+      #print ("INFO: processing",arg)
       if arg == "--path":
          if i != nargs-1:
             file = sys.argv[i+1]
@@ -199,6 +199,10 @@ if file[0:3] == 'gfs':
         f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
                 file + ' PLOT SUCCESS\n')
         f.close()
+        f = open('/root/GFS/sysreport/running.txt', 'a+')
+        f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
+                file + ' PLOT SUCCESS\n')
+        f.close()
         del f
     except:
         print('[ERR:unknown] File:' + file)
@@ -207,6 +211,10 @@ if file[0:3] == 'gfs':
                 file + ' PLOT FAILED! PLEASE CHECK\n')
         f.close()
         f = open('/root/GFS/sysreport/errreport.txt', 'a+')
+        f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
+                file + ' PLOT FAILED! PLEASE CHECK!\n')
+        f.close()
+        f = open('/root/GFS/sysreport/running.txt', 'a+')
         f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
                 file + ' PLOT FAILED! PLEASE CHECK!\n')
         f.close()
