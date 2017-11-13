@@ -131,7 +131,6 @@ def plotWTP(file):
                  sizes=dict(emptybarb=0, spacing=0.2, height=0.5),barb_increments=dict(half=2, full=4, flag=20 ),
                  linewidth=0.2, color='black')
 
-
     plt.title('GFS 10m Wind & 2m Air Temperature & MSLP\nlnit:' + formatfcit + ' Forecast Hour[' + str(fcst) + '] valid at ' + formatvalid + '\n@myyd & Louis-He',
                   loc='left', fontsize=11)
     m.drawparallels(np.arange(0, 65, 10), labels=[1,0,0,0], fontsize=8, linewidth=0.5,color='dimgrey',dashes=[1,1])
@@ -153,6 +152,8 @@ def plotWTP(file):
     plt.clf()
     plt.close(0)
     del subMSLP, subWU, subWV, subT, m, lon, lat, lons, lats, TT
+    del fig
+
 
 # run at the beginning of the program
 def initialize():
