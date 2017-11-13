@@ -43,6 +43,17 @@ def createsh():
                     '[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
                     file + ' SCRIPT INITIALIZE FAILED! PLEASE CHECK\n')
                 f.close()
+    print('[' + time.strftime('%Y-%m-%d %H:%M:%S',
+                              time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Script Done. Ready to plot.')
+
+def plot():
+    print('[' + time.strftime('%Y-%m-%d %H:%M:%S',
+                              time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Start script.')
+    f = open('/root/GFS/sysreport/plotreport.txt', 'a+')
+    f.write(
+        '[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\tStart plot.\n')
+    f.close()
+    os.system('sh plot.sh')
 
 initialize()
 createsh()

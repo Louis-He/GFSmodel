@@ -57,7 +57,7 @@ def plotWTP(file):
     lon, lat = np.meshgrid(lons, lats)
     x, y = m(lon, lat)
 
-    fig = plt.figure(figsize=(10,7), dpi=100)
+    fig = plt.figure(figsize=(10,7), dpi=150)
     ax = plt.gca()
     ax.spines['right'].set_color('none')
     ax.spines['left'].set_color('none')
