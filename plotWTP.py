@@ -156,7 +156,6 @@ def plotWTP(file):
     plt.close(0)
     del subMSLP, subWU, subWV, subT, m, lon, lat, lons, lats, TT, my_cmap, norm, d, d1, cbar, ax, ax2, x, y, skip, analysistime, fcit, formatfcit, timestampfcit, fcst, formatvalid
 
-
 # run at the beginning of the program
 def initialize():
 
