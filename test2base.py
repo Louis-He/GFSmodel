@@ -152,9 +152,10 @@ def plotWTP(file):
 # run at the beginning of the program
 def initialize():
     os.system('rm -rf product/')
-    print('['+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60))+']'+'Erase expired rawfile')
+    print('['+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60))+']'+'Erase expired product')
     os.system('mkdir product')
-    print('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Create rawfile folder')
+    os.system('mkdir product/WTP')
+    print('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Create product folder')
     f = open('/root/GFS/sysreport/plotreport.txt', 'w+')
     f.close()
     print('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Create system report file...')
