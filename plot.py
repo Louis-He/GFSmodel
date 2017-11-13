@@ -8,8 +8,11 @@ import matplotlib.pyplot as plt
 import matplotlib.lines as mlines
 import numpy as np
 import os
+import time
 
-def plot(filepath):
+utc = -5
+
+def plotmaxT(filepath):
     grbs = pygrib.open('rawfile/' + filepath)
     grb = grbs.select(name='Maximum temperature')[0]
     maxt = grb.values.T
@@ -63,13 +66,41 @@ def plot(filepath):
     plt.clf()
     plt.close(fig)
 
+# run at the beginning of the program
+def initialize():
+    os.system('rm -rf product/')
+    print('['+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60))+']'+'Erase expired rawfile')
+    os.system('mkdir product')
+    print('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Create rawfile folder')
+    f = open('/root/GFS/sysreport/plotreport.txt', 'w+')
+    f.close()
+    print('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Create system report file...')
+    f = open('/root/GFS/sysreport/errreport.txt', 'w+')
+    f.close()
+    print('[' + time.strftime('%Y-%m-%d %H:%M:%S',
+                              time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Create system error report file...')
+    print('[' + time.strftime('%Y-%m-%d %H:%M:%S',
+                              time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Start to plot...')
+
 path = 'rawfile/'
 files= os.listdir(path)
 print(files)
 for file in files:
     if file[0:3] == 'gfs':
         try:
-            plot(file)
-            print('[Compele]')
+            plotmaxT(file)
+            print('[Compele Plotting] File:' + file)
+            f = open('/root/GFS/sysreport/plotreport.txt', 'a+')
+            f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
+                    file + ' PLOT SUCCESS\n')
+            f.close()
         except:
-            print('[ERR:unknown]')
+            print('[ERR:unknown] File:' + file)
+            f = open('/root/GFS/sysreport/plotreport.txt', 'a+')
+            f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
+                    file + ' PLOT FAILED! PLEASE CHECK\n')
+            f.close()
+            f = open('/root/GFS/sysreport/errreport.txt', 'a+')
+            f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
+                    file + ' PLOT FAILED! PLEASE CHECK!\n')
+            f.close()

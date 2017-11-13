@@ -50,7 +50,7 @@ def initialize():
     os.system('mkdir rawfile')
     print('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Create rawfile folder')
     print('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Start downloading file...')
-    f = open('/root/GFS/sysreport/downloadreport.txt', 'r+')
+    f = open('/root/GFS/sysreport/downloadreport.txt', 'w+')
     f.close()
     print('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Create system report file...')
 
