@@ -92,7 +92,7 @@ m = Basemap(llcrnrlon=77,llcrnrlat=13,urcrnrlon=145,urcrnrlat=52,projection='lcc
 lon, lat = np.meshgrid(lons, lats)
 x, y = m(lon, lat)
 
-fig=plt.figure(figsize=(10,7), dpi=500)
+fig=plt.figure(figsize=(10,7), dpi=100)
 ax = plt.gca()
 ax.spines['right'].set_color('none')
 ax.spines['left'].set_color('none')
