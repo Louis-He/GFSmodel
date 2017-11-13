@@ -151,7 +151,7 @@ def plotWTP(file):
     # delete plot for memory
     plt.clf()
     plt.close(0)
-    del subMSLP, subWU, subWV, subT, m, lon, lat, lons, lats, TT
+    del subMSLP, subWU, subWV, subT, m, lon, lat, lons, lats, TT, my_cmap, norm, d, d1, cbar, ax, ax2, x, y
     del fig
 
 
@@ -185,6 +185,7 @@ for file in files:
             f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
                     file + ' PLOT SUCCESS\n')
             f.close()
+            del f
         except:
             print('[ERR:unknown] File:' + file)
             f = open('/root/GFS/sysreport/plotreport.txt', 'a+')
@@ -195,3 +196,4 @@ for file in files:
             f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
                     file + ' PLOT FAILED! PLEASE CHECK!\n')
             f.close()
+            del f
