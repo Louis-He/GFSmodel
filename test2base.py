@@ -171,13 +171,14 @@ files= os.listdir(path)
 print(files)
 for file in files:
     if file[0:3] == 'gfs':
-        try:
-            plotWTP(file)
-            print('[Compele Plotting] File:' + file)
-            f = open('/root/GFS/sysreport/plotreport.txt', 'a+')
-            f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
-                    file + ' PLOT SUCCESS\n')
-            f.close()
+        #try:
+        plotWTP(file)
+        print('[Compele Plotting] File:' + file)
+        f = open('/root/GFS/sysreport/plotreport.txt', 'a+')
+        f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
+                file + ' PLOT SUCCESS\n')
+        f.close()
+        '''
         except:
             print('[ERR:unknown] File:' + file)
             f = open('/root/GFS/sysreport/plotreport.txt', 'a+')
@@ -188,3 +189,4 @@ for file in files:
             f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
                     file + ' PLOT FAILED! PLEASE CHECK!\n')
             f.close()
+        '''
