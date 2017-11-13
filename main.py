@@ -4,7 +4,7 @@ import urllib.request
 from urllib.request import urlretrieve,urlopen
 import os
 
-utc = -5
+utc = 0
 
 # return the URL of the latest GFS model (4 hours after the initial)
 def decideURL(forecasthour):
