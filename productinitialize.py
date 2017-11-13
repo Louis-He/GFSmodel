@@ -45,7 +45,7 @@ def start():
     f.write(
         '[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\tStart running plot script.\n')
     f.close()
-    os.system('sh process.sh')
+    os.system('sh plot.sh')
 
 plotinitialize()
 createsh()
