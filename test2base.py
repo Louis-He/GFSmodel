@@ -3,7 +3,7 @@ import pygrib
 
 from mpl_toolkits.basemap import Basemap, cm, shiftgrid
 import matplotlib as mpl
-matplotlib.use('Agg')
+mpl.use('Agg')
 
 import matplotlib.pyplot as plt
 import matplotlib.lines as mlines
