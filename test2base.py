@@ -56,7 +56,7 @@ def plotWTP(file):
     lon, lat = np.meshgrid(lons, lats)
     x, y = m(lon, lat)
 
-    fig=plt.figure(figsize=(10,7), dpi=100)
+    fig = plt.figure(figsize=(10,7), dpi=100)
     ax = plt.gca()
     ax.spines['right'].set_color('none')
     ax.spines['left'].set_color('none')
@@ -149,11 +149,11 @@ def plotWTP(file):
     plt.savefig('product/WTP/' + file + '.png', bbox_inches='tight')
 
     # delete plot for memory
-    plt.clf()
+    del fig
     plt.cla
+    plt.clf()
     plt.close(0)
     del subMSLP, subWU, subWV, subT, m, lon, lat, lons, lats, TT, my_cmap, norm, d, d1, cbar, ax, ax2, x, y, skip, analysistime, fcit, formatfcit, timestampfcit, fcst, formatvalid
-    del fig
 
 
 # run at the beginning of the program
