@@ -36,7 +36,7 @@ def plotWTP(file):
     timestampfcit = time.mktime(fcit) # timestamp of initial time
 
     fcst = Temperature.forecastTime # integer
-    formatvalid = time.strftime('%Hz %m %d %Y', time.localtime(fcit)) # formatted validtime
+    formatvalid = time.strftime('%Hz %m %d %Y', time.localtime(timestampfcit)) # formatted validtime
 
     # extract each data
     subT = Temperature.values - 273.15
