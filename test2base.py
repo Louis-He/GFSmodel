@@ -185,5 +185,14 @@ del subT
 del subWV
 del subWU
 del subMSLP
+del lats
+del lons
+del x
+del y
+del lat
+del lon
+del TT
+del my_cmap
+del norm
 #GFS 10m Wind and 2m Air Temperature\nlnit:00z Nov 04 2017 Forecast Hour[36] valid at 12z Sun,Nov 05 2017 6-hour #ERA Interim 850hpa Wind speed and Temperature & 500hpa Geopotential Height#Streamlines
 plt.savefig('gfs.png', bbox_inches='tight')
