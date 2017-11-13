@@ -150,8 +150,9 @@ def plotWTP(file):
 
     # delete plot for memory
     plt.clf()
+    plt.cla
     plt.close(0)
-    del subMSLP, subWU, subWV, subT, m, lon, lat, lons, lats, TT, my_cmap, norm, d, d1, cbar, ax, ax2, x, y
+    del subMSLP, subWU, subWV, subT, m, lon, lat, lons, lats, TT, my_cmap, norm, d, d1, cbar, ax, ax2, x, y, skip
     del fig
 
 
