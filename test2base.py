@@ -27,13 +27,18 @@ def plot():
     wind10m_v = grbs.select(name='10 metre V wind component')[0]
     MSLP = grbs.select(name='MSLP (Eta model reduction)')[0]
     lats, lons = Temperature.latlons()
-    lats = lats.T
+    lats = (lats.T)[0]
     lons = lons[0]
 
     subT = Temperature.values - 273.15
     subWU = wind10m_u.values
     subWV = wind10m_v.values
     subMSLP = MSLP.values / 100.0
+
+    del Temperature
+    del wind10m_u
+    del wind10m_v
+    del MSLP
 
     # extract data and get lat/lon values for a subset over China
     '''
@@ -46,7 +51,6 @@ def plot():
     subWV, lats, lons = wind10m_v.data(lat1=latL, lat2=latH, lon1=lonL, lon2=lonR)
     subMSLP, lats, lons = MSLP.data(lat1=latL, lat2=latH, lon1=lonL, lon2=lonR)
     '''
-
 
 
     '''
