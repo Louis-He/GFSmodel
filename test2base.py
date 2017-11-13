@@ -151,6 +151,7 @@ def plotWTP(file):
 
     # delete plot for memory
     plt.close(0)
+    plt.clf()
 
 # run at the beginning of the program
 def initialize():
