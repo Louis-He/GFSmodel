@@ -38,6 +38,7 @@ del Temperature
 del wind10m_u
 del wind10m_v
 del MSLP
+del grbs
 
 # extract data and get lat/lon values for a subset over China
 '''
@@ -180,5 +181,9 @@ cbar.ax.set_ylabel('Temperature(℃)', size=8)#Temperature(℃)
 cbar.ax.tick_params(labelsize=8)
 #Temperature(℃)
 
+del subT
+del subWV
+del subWU
+del subMSLP
 #GFS 10m Wind and 2m Air Temperature\nlnit:00z Nov 04 2017 Forecast Hour[36] valid at 12z Sun,Nov 05 2017 6-hour #ERA Interim 850hpa Wind speed and Temperature & 500hpa Geopotential Height#Streamlines
 plt.savefig('gfs.png', bbox_inches='tight')
