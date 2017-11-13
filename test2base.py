@@ -150,8 +150,9 @@ def plotWTP(file):
     plt.savefig('product/WTP/' + file + '.png', bbox_inches='tight')
 
     # delete plot for memory
-    plt.close(0)
     plt.clf()
+    plt.close(0)
+    del subMSLP, subWU, subWV, subT, m, lon, lat, lons, lats, TT
 
 # run at the beginning of the program
 def initialize():
