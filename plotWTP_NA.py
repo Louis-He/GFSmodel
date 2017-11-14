@@ -119,8 +119,8 @@ def plotWTP(file):
     m.contourf(x, y, subT, 110, cmap=my_cmap, norm=norm)#,norm=norm cmaps.temp_19lev NCV_jaisnd
     d=m.contour(x, y, subT, 110, colors = 'red', linewidths=0.6, levels=0)
     d1=m.contour(x, y, subMSLP, 70, colors = 'whitesmoke', linewidths=0.5)#, alpha=0.6
-    plt.clabel(d, inline = True, fmt='%.0f', fontsize=2)
-    plt.clabel(d1, inline = True, fmt='%.0f', colors='whitesmoke', fontsize=2)#alpha=0.6,
+    plt.clabel(d, inline = True, fmt='%.0f', fontsize=6)
+    plt.clabel(d1, inline = True, fmt='%.0f', colors='whitesmoke', fontsize=5)#alpha=0.6,
 
 
     skip=slice(None,None,5)
