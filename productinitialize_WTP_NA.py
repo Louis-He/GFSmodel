@@ -4,10 +4,9 @@ import time
 utc = 0
 
 def plotinitialize():
-    os.system('rm -rf product/')
+    os.system('rm -rf product/WTP_NA')
     print('['+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60))+']'+'Erase expired product')
-    os.system('mkdir product')
-    os.system('mkdir product/WTP')
+    os.system('mkdir product/WTP_NA')
     print('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Create product folder')
     f = open('/root/GFS/sysreport/plotreport.txt', 'w+')
     f.close()
@@ -26,7 +25,7 @@ def createsh():
             try:
                 f = open('/root/GFS/plot.sh', 'a+')
                 f.write(
-                    'python3 plotWTP.py --path ' + file + '\n')
+                    'python3 plotWTP_NA.py --path ' + file + '\n')
                 f.close()
             except:
                 print('[FATAL ERR] PROGRAM STOP' + file)
@@ -37,7 +36,6 @@ def createsh():
                 f.close()
     print('[' + time.strftime('%Y-%m-%d %H:%M:%S',
                               time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Script Done. Ready to run.\n')
-
 
 def start():
     print('[' + time.strftime('%Y-%m-%d %H:%M:%S',
