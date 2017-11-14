@@ -51,7 +51,7 @@ def plotWTP(file):
     del grbs
 
     # generatre basemap
-    m = Basemap(llcrnrlon=-125,llcrnrlat=30,urcrnrlon=-55,urcrnrlat=60,projection='lcc',lat_0=40, lon_0=-95,resolution ='l',area_thresh=1)
+    m = Basemap(llcrnrlon=-105,llcrnrlat=25,urcrnrlon=-50,urcrnrlat=55,projection='lcc',lat_0=40, lon_0=-80,resolution ='l',area_thresh=1)
     lon, lat = np.meshgrid(lons, lats)
     x, y = m(lon, lat)
 
