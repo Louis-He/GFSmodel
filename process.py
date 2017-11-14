@@ -10,8 +10,6 @@ def createsh():
     f.close()
     print('[' + time.strftime('%Y-%m-%d %H:%M:%S',
                               time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Write script file...\n')
-    f = open('/root/GFS/plot.sh', 'w+')
-    f.close()
     f = open('/root/GFS/process.sh', 'w+')
     f.write(
         'python3 main.py\npython3 productinitialize.py\n')

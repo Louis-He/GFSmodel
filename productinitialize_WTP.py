@@ -4,6 +4,8 @@ import time
 utc = 0
 
 def plotinitialize():
+    f = open('/root/GFS/plot.sh', 'w+')
+    f.close()
     os.system('rm -rf product/WTP')
     print('['+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60))+']'+'Erase expired product')
     os.system('mkdir product/WTP')
