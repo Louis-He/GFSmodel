@@ -6,12 +6,10 @@ import matplotlib as mpl
 mpl.use('Agg')
 
 import matplotlib.pyplot as plt
-import matplotlib.lines as mlines
 import numpy as np
 import os
 import time
 import pygrib
-import datetime
 
 utc = 0
 

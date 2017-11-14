@@ -38,6 +38,7 @@ def createsh():
     print('[' + time.strftime('%Y-%m-%d %H:%M:%S',
                               time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Script Done. Ready to run.\n')
 
+
 def start():
     print('[' + time.strftime('%Y-%m-%d %H:%M:%S',
                               time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Start plot script.\n')

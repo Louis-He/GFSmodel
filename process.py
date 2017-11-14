@@ -6,7 +6,7 @@ utc = 0
 def createsh():
     f = open('/root/GFS/sysreport/running.txt', 'w+')
     f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S',
-                              time.localtime(time.time() + utc * 60 * 60)) + ']' + 'System start.\n')
+                              time.localtime(time.time() + utc * 60 * 60)) + ']' + '\tSystem start.\n')
     f.close()
     print('[' + time.strftime('%Y-%m-%d %H:%M:%S',
                               time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Write script file...\n')
