@@ -10,9 +10,6 @@ import numpy as np
 import os
 import time
 import pygrib
-import color
-if __name__ == "__main__":
-    ys=color.temp
 
 utc = 0
 
@@ -66,8 +63,56 @@ def plotWTP(file):
     ax.spines['top'].set_color('none')
 
     # generate legend
-    
-    my_cmap = mpl.colors.LinearSegmentedColormap('my_colormap',ys,256)
+    TT = {'red': ((0, 246/255, 246/255),
+                     (20/110, 241/255, 241/255),#CDG-81
+                     (35/110, 188/255, 188/255),#CMG-80.9
+                     (40/110, 123/255, 123/255),#CMG-76
+                     (45/110, 183/255, 183/255),#LG-63.9
+                     (50/110, 76/255, 76/255),#LG-54
+                     (55/110, 44/255, 44/255),#MG-53.9
+                     (599/1100, 4/255, 4/255),#MG-42
+                     (60/110, 109/255, 109/255),#DG-41.9
+                     (67/110, 21/255, 21/255),#DG-31
+                     (75/110, 253/255, 253/255),#OW-30.9
+                     (85/110, 191/255, 191/255),#OW+9
+                     (90/110, 159/255, 159/255),#WMG+9
+                     (100/110, 246/255, 246/255),#WMG+9
+                     (105/110, 118/255, 118/255),#WMG+9
+                     (1.0, 145/255, 145/255)),
+            'green':((0, 183/255, 183/255),
+                     (20/110, 18/255, 18/255),#CDG-81
+                     (35/110, 114/255, 114/255),#CMG-80.9
+                     (40/110, 81/255, 81/255),#CMG-76
+                     (45/110, 184/255, 184/255),#LG-63.9
+                     (50/110, 73/255, 73/255),#LG-54
+                     (55/110, 144/255, 144/255),#MG-53.9
+                     (599/1100, 255/255, 255/255),#MG-42
+                     (60/110, 231/255, 231/255),#DG-41.9
+                     (67/110, 167/255, 167/255),#DG-31
+                     (75/110, 235/255, 235/255),#OW-30.9
+                     (85/110, 31/255, 31/255),#OW+9
+                     (90/110, 32/255, 32/255),#WMG+9
+                     (100/110, 183/255, 183/255),#WMG+9
+                     (105/110, 114/255, 114/255),#WMG+9
+                     (1.0, 40/255, 40/255)),
+            'blue': ((0, 244/255, 244/255),
+                     (20/110, 134/255, 134/255),#CDG-81
+                     (35/110, 199/255, 199/255),#CMG-80.9
+                     (40/110, 169/255, 169/255),#CMG-76
+                     (45/110, 226/255, 226/255),#LG-63.9
+                     (50/110, 182/255, 182/255),#LG-54
+                     (55/110, 254/255, 254/255),#MG-53.9
+                     (599/1100, 255/255, 255/255),#MG-42
+                     (60/110, 153/255, 153/255),#DG-41.9
+                     (67/110, 31/255, 31/255),#DG-31
+                     (75/110, 118/255, 118/255),#OW-30.9
+                     (85/110, 17/255, 17/255),#OW+9
+                     (90/110, 51/255, 51/255),#WMG+9
+                     (100/110, 244/255, 244/255),#WMG+9
+                     (105/110, 199/255, 199/255),#WMG+9
+                     (1.0, 139/255, 139/255))}
+
+    my_cmap = mpl.colors.LinearSegmentedColormap('my_colormap',TT,256)
     norm=mpl.colors.Normalize(-60, 50)
 
     #c=plt.contourf(x, y, rt, 750, cmap=my_cmap, norm=norm)
@@ -91,7 +136,7 @@ def plotWTP(file):
     m.drawmeridians(np.arange(65., 180., 10), labels=[0,0,0,1], fontsize=8, linewidth=0.5,color='dimgrey',dashes=[1,1])
     m.drawcoastlines(linewidth=0.5)
     m.drawstates(linewidth=0.4,color='dimgrey')
-    m.readshapefile('/mnt/c/Users/10678/Desktop/GFS/shp/cnhimap', 'states', drawbounds=True, linewidth=0.5, color='black')
+    #m.readshapefile('D:\\shp\\provinces', 'states', drawbounds=True, linewidth=0.5, color='black')
     ax2 = fig.add_axes([0.88, 0.11, 0.018, 0.77])
     cbar=mpl.colorbar.ColorbarBase(ax2, cmap=my_cmap, norm=norm, orientation='vertical', drawedges=False)
     cbar.set_ticks(np.linspace(-60,50,23))
