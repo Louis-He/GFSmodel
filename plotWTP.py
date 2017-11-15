@@ -91,7 +91,7 @@ def plotWTP(file):
     m.drawmeridians(np.arange(65., 180., 10), labels=[0,0,0,1], fontsize=8, linewidth=0.5,color='dimgrey',dashes=[1,1])
     m.drawcoastlines(linewidth=0.5)
     m.drawstates(linewidth=0.4,color='dimgrey')
-    m.readshapefile('/mnt/c/Users/10678/Desktop/GFS/shp/cnhimap', 'states', drawbounds=True, linewidth=0.5, color='black')
+    #m.readshapefile('/mnt/c/Users/10678/Desktop/GFS/shp/cnhimap', 'states', drawbounds=True, linewidth=0.5, color='black')
     ax2 = fig.add_axes([0.88, 0.11, 0.018, 0.77])
     cbar=mpl.colorbar.ColorbarBase(ax2, cmap=my_cmap, norm=norm, orientation='vertical', drawedges=False)
     cbar.set_ticks(np.linspace(-60,50,23))
