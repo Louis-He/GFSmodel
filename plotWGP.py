@@ -24,6 +24,7 @@ def plotWTP(file, areatype):
     tmpstr = 'boundary=' + areatype
 
     '''
+    #NOT OPERATING(python3 bug)
     print(tmpstr)
     exec(tmpstr)
     print(boundary)
@@ -99,7 +100,7 @@ def plotWTP(file, areatype):
                  sizes=dict(emptybarb=0, spacing=0.2, height=0.5),barb_increments=dict(half=2, full=4, flag=20 ),
                  linewidth=0.2, color='black')
 
-    plt.title('GFS 10m Wind & 2m Air Temperature & MSLP\nlnit:' + formatfcit + ' Forecast Hour[' + str(fcst) + '] valid at ' + formatvalid + '\n@myyd & Louis-He',
+    plt.title('GFS 500hpa Geopotential Height, 850hpa Wind & 850hpa Air Temperature\nlnit:' + formatfcit + ' Forecast Hour[' + str(fcst) + '] valid at ' + formatvalid + '\n@myyd & Louis-He',
                   loc='left', fontsize=11)
     m.drawparallels(np.arange(0, 65, 10), labels=[1,0,0,0], fontsize=8, linewidth=0.5,color='dimgrey',dashes=[1,1])
     m.drawmeridians(np.arange(65., 180., 10), labels=[0,0,0,1], fontsize=8, linewidth=0.5,color='dimgrey',dashes=[1,1])
@@ -114,7 +115,7 @@ def plotWTP(file, areatype):
     #Temperature(℃)
 
     #GFS 10m Wind and 2m Air Temperature\nlnit:00z Nov 04 2017 Forecast Hour[36] valid at 12z Sun,Nov 05 2017 6-hour #ERA Interim 850hpa Wind speed and Temperature & 500hpa Geopotential Height#Streamlines
-    plt.savefig('product/WTP/' + file + '.png', bbox_inches='tight')
+    plt.savefig('product/WGP/' + file + '.png', bbox_inches='tight')
 
     # delete plot for memory
     del fig
