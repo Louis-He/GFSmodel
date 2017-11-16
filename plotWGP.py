@@ -22,7 +22,7 @@ def plotWTP(file, areatype):
     # set boundary through areatype
     boundary = ''
     exec('boundary = ' + areatype)
-    print(boundary)
+    print('boundary'+boundary)
 
     #read in files
     grbs = pygrib.open('rawfile/' + file)
