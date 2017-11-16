@@ -28,10 +28,10 @@ def plotWTP(file, areatype):
     exec(tmpstr)
     print(boundary)
     '''
-    
+
     ldict = locals()
     exec(tmpstr, globals(), ldict)
-    boundary = ldict['bounday']
+    boundary = ldict['boundary']
     print(boundary)
 
     #read in files
