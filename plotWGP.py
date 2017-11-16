@@ -157,7 +157,7 @@ for i in range(1,nargs):
 path = 'rawfile/' + file
 if file[0:3] == 'gfs':
     #try:
-    plotWTP(file, pic)
+    plotWTP(file, areatype=pic)
     print('[Compele Plotting] File:' + file)
     f = open('/root/GFS/sysreport/plotreport.txt', 'a+')
     f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
