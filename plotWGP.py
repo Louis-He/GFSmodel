@@ -22,7 +22,7 @@ def plotWTP(file, areatype):
     boundary = ''
     exec('boundary = ' + areatype)
     print(boundary)
-    
+
     #read in files
     grbs = pygrib.open('rawfile/' + file)
     # extract data from grib file
@@ -146,6 +146,7 @@ for i in range(1,nargs):
          if i != nargs-1:
             pic=sys.argv[i+1]
             skip=True
+            print('AREA:' + pic)
       else:
          print ("ERR: unknown arg:",arg)
    else:
