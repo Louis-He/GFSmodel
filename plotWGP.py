@@ -18,7 +18,7 @@ if __name__ == "__main__":
 utc = 0
 
 # plot the diagram of 850hpa wind +  T + Wind
-def plotWTP(file, areatype):
+def plotWGP(file, areatype):
     # set boundary through areatype
     boundary = ''
     tmpstr = 'boundary=' + areatype
@@ -167,7 +167,7 @@ for i in range(1,nargs):
 path = 'rawfile/' + file
 if file[0:3] == 'gfs':
     #try:
-    plotWTP(file, areatype=pic)
+    plotWGP(file, areatype=pic)
     print('[Compele Plotting] File:' + file)
     f = open('/root/GFS/sysreport/plotreport.txt', 'a+')
     f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
