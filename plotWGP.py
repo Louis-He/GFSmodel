@@ -11,6 +11,8 @@ import os
 import time
 import pygrib
 import color
+from area import *
+
 if __name__ == "__main__":
     ys=color.temp
 utc = 0
@@ -18,12 +20,18 @@ utc = 0
 # plot the diagram of 850hpa wind +  T + Wind
 def plotWTP(file, areatype):
     # set boundary through areatype
-    from area import *
-
     boundary = ''
     tmpstr = 'boundary=' + areatype
+
+    '''
     print(tmpstr)
     exec(tmpstr)
+    print(boundary)
+    '''
+    
+    ldict = locals()
+    exec(tmpstr, globals(), ldict)
+    boundary = ldict['bounday']
     print(boundary)
 
     #read in files
