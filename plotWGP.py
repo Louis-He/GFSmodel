@@ -13,18 +13,23 @@ import pygrib
 import color
 if __name__ == "__main__":
     ys=color.temp
+import area
 
 utc = 0
 
-# plot the diagram of 10m wind + 2m T + MSLPz
-def plotWTP(file):
+# plot the diagram of 850hpa wind +  T + Wind
+def plotWTP(file, areatype):
+    # set boundary through areatype
+    boundary = ''
+    exec('boundary = ' + areatype)
+
     #read in files
     grbs = pygrib.open('rawfile/' + file)
     # extract data from grib file
-    Temperature = grbs.select(name='2 metre temperature')[0]
-    wind10m_u = grbs.select(name='10 metre U wind component')[0]
-    wind10m_v = grbs.select(name='10 metre V wind component')[0]
-    MSLP = grbs.select(name='MSLP (Eta model reduction)')[0]
+    Temperature = grbs.select(name='Temperature')[25]
+    wind850_u = grbs.select(name='U component of wind')[26]
+    wind850_v = grbs.select(name='V component of wind')[26]
+    MSLP = grbs.select(name='Geopotential Height')[18]
 
     # define longitude and latitude
     lats, lons = Temperature.latlons()
@@ -42,19 +47,19 @@ def plotWTP(file):
 
     # extract each data
     subT = Temperature.values - 273.15
-    subWU = wind10m_u.values
-    subWV = wind10m_v.values
+    subWU = wind850_u.values
+    subWV = wind850_v.values
     subMSLP = MSLP.values / 100.0
 
     # delete unnecessary variables
     del Temperature
-    del wind10m_u
-    del wind10m_v
+    del wind850_u
+    del wind850_v
     del MSLP
     del grbs
 
     # generatre basemap
-    m = Basemap(llcrnrlon=77,llcrnrlat=13,urcrnrlon=145,urcrnrlat=52,projection='lcc',lat_0=30, lon_0=105,resolution ='l',area_thresh=1)
+    m = Basemap(llcrnrlon=boundary[0],llcrnrlat=boundary[1],urcrnrlon=boundary[2],urcrnrlat=boundary[3],projection='lcc',lat_0=boundary[4], lon_0=boundary[5],resolution ='l',area_thresh=1)
     lon, lat = np.meshgrid(lons, lats)
     x, y = m(lon, lat)
 
@@ -105,7 +110,7 @@ def plotWTP(file):
     plt.cla
     plt.clf()
     plt.close(0)
-    del subMSLP, subWU, subWV, subT, m, lon, lat, lons, lats, TT, my_cmap, norm, d, d1, cbar, ax, ax2, x, y, skip, analysistime, fcit, formatfcit, timestampfcit, fcst, formatvalid
+    del subMSLP, subWU, subWV, subT, m, lon, lat, lons, lats, my_cmap, norm, d, d1, cbar, ax, ax2, x, y, skip, analysistime, fcit, formatfcit, timestampfcit, fcst, formatvalid
 
 # run at the beginning of the program
 def initialize():
@@ -125,6 +130,8 @@ def initialize():
     print('[' + time.strftime('%Y-%m-%d %H:%M:%S',
                               time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Start to plot...')
 
+#using script file
+#import the file name of rawfile, range of longitude and latitude
 nargs=len(sys.argv)
 skip=False
 for i in range(1,nargs):
@@ -135,6 +142,10 @@ for i in range(1,nargs):
          if i != nargs-1:
             file = sys.argv[i+1]
             skip=True
+      elif arg == "--area":
+         if i != nargs-1:
+            pic=sys.argv[i+1]
+            skip=True
       else:
          print ("ERR: unknown arg:",arg)
    else:
@@ -144,7 +155,7 @@ for i in range(1,nargs):
 path = 'rawfile/' + file
 if file[0:3] == 'gfs':
     try:
-        plotWTP(file)
+        plotWTP(file,pic)
         print('[Compele Plotting] File:' + file)
         f = open('/root/GFS/sysreport/plotreport.txt', 'a+')
         f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
