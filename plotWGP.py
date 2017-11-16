@@ -115,7 +115,7 @@ def plotWGP(file, areatype):
     #Temperature(℃)
 
     #GFS 10m Wind and 2m Air Temperature\nlnit:00z Nov 04 2017 Forecast Hour[36] valid at 12z Sun,Nov 05 2017 6-hour #ERA Interim 850hpa Wind speed and Temperature & 500hpa Geopotential Height#Streamlines
-    plt.savefig('product/WGP/' + file + '.png', bbox_inches='tight')
+    plt.savefig('product/WGP/' + areatype + file + '.png', bbox_inches='tight')
 
     # delete plot for memory
     del fig

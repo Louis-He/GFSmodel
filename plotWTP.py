@@ -13,11 +13,28 @@ import pygrib
 import color
 if __name__ == "__main__":
     ys=color.temp
+from color import *
 
 utc = 0
 
 # plot the diagram of 10m wind + 2m T + MSLPz
-def plotWTP(file):
+def plotWTP(file, areatype):
+    # set boundary through areatype
+    boundary = ''
+    tmpstr = 'boundary=' + areatype
+
+    '''
+    #NOT OPERATING(python3 bug)
+    print(tmpstr)
+    exec(tmpstr)
+    print(boundary)
+    '''
+
+    ldict = locals()
+    exec(tmpstr, globals(), ldict)
+    boundary = ldict['boundary']
+    print(boundary)
+
     #read in files
     grbs = pygrib.open('rawfile/' + file)
     # extract data from grib file
@@ -100,7 +117,7 @@ def plotWTP(file):
     #Temperature(℃)
 
     #GFS 10m Wind and 2m Air Temperature\nlnit:00z Nov 04 2017 Forecast Hour[36] valid at 12z Sun,Nov 05 2017 6-hour #ERA Interim 850hpa Wind speed and Temperature & 500hpa Geopotential Height#Streamlines
-    plt.savefig('product/WTP/' + file + '.png', bbox_inches='tight')
+    plt.savefig('product/WTP/' + areatype + file + '.png', bbox_inches='tight')
 
     # delete plot for memory
     del fig
@@ -136,6 +153,10 @@ for i in range(1,nargs):
       if arg == "--path":
          if i != nargs-1:
             file = sys.argv[i+1]
+            skip=True
+      elif arg == "--area":
+         if i != nargs-1:
+            pic=sys.argv[i+1]
             skip=True
       else:
          print ("ERR: unknown arg:",arg)

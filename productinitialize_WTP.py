@@ -27,7 +27,7 @@ def createsh():
             try:
                 f = open('/root/GFS/plot.sh', 'a+')
                 f.write(
-                    'python3 plotWTP.py --path ' + file + '\n')
+                    'python3 plotWTP.py --path ' + file + ' --area CN\n')
                 f.close()
             except:
                 print('[FATAL ERR] PROGRAM STOP' + file)
