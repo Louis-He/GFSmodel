@@ -18,6 +18,7 @@ utc = 0
 
 # plot the diagram of 850hpa wind +  T + Wind
 def plotWTP(file, areatype):
+    print('AREATYPE:'+areatype)
     # set boundary through areatype
     boundary = ''
     exec('boundary = ' + areatype)
