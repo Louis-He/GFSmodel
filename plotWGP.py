@@ -20,7 +20,7 @@ utc = 0
 def plotWTP(file, areatype):
     # set boundary through areatype
     boundary = ''
-    tmpstr = 'boundary = ' + areatype
+    tmpstr = 'boundary=' + areatype
     print(tmpstr)
     exec(tmpstr)
     print(boundary)
