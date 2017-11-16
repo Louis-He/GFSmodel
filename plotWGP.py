@@ -13,8 +13,7 @@ import pygrib
 import color
 if __name__ == "__main__":
     ys=color.temp
-import area
-
+from area import *
 utc = 0
 
 # plot the diagram of 850hpa wind +  T + Wind
