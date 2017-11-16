@@ -1,6 +1,4 @@
 import sys
-import pygrib
-
 from mpl_toolkits.basemap import Basemap, cm, shiftgrid
 import matplotlib as mpl
 mpl.use('Agg')
@@ -21,10 +19,10 @@ def plotWTP(file):
     #read in files
     grbs = pygrib.open('rawfile/' + file)
     # extract data from grib file
-    Temperature = grbs.select(name='2 metre temperature')[0]
-    wind10m_u = grbs.select(name='10 metre U wind component')[0]
-    wind10m_v = grbs.select(name='10 metre V wind component')[0]
-    MSLP = grbs.select(name='MSLP (Eta model reduction)')[0]
+    Temperature = grbs.select(name='Temperature')[25]
+    wind850_u = grbs.select(name='U component of wind')[26]
+    wind850_v = grbs.select(name='V component of wind')[26]
+    MSLP = grbs.select(name='Geopotential Height')[18]
 
     # define longitude and latitude
     lats, lons = Temperature.latlons()
@@ -42,38 +40,40 @@ def plotWTP(file):
 
     # extract each data
     subT = Temperature.values - 273.15
-    subWU = wind10m_u.values
-    subWV = wind10m_v.values
-    subMSLP = MSLP.values / 100.0
+    subWU = wind850_u.values
+    subWV = wind850_v.values
+    subMSLP = MSLP.values / 10.0
 
     # delete unnecessary variables
     del Temperature
-    del wind10m_u
-    del wind10m_v
+    del wind850_u
+    del wind850_v
     del MSLP
     del grbs
 
     # generatre basemap
-    m = Basemap(llcrnrlon=-105,llcrnrlat=25,urcrnrlon=-50,urcrnrlat=55,projection='lcc',lat_0=40, lon_0=-80,resolution ='l',area_thresh=1)
+    m = Basemap(llcrnrlon=77,llcrnrlat=13,urcrnrlon=145,urcrnrlat=52,projection='lcc',lat_0=30, lon_0=105,resolution ='l',area_thresh=1)
     lon, lat = np.meshgrid(lons, lats)
     x, y = m(lon, lat)
 
-    fig = plt.figure(figsize=(10,7), dpi=150)
+    fig = plt.figure(figsize=(10,7), dpi=500)
     ax = plt.gca()
     ax.spines['right'].set_color('none')
     ax.spines['left'].set_color('none')
     ax.spines['bottom'].set_color('none')
     ax.spines['top'].set_color('none')
 
+    # generate legend
+    
     my_cmap = mpl.colors.LinearSegmentedColormap('my_colormap',ys,256)
     norm=mpl.colors.Normalize(-60, 50)
 
     #c=plt.contourf(x, y, rt, 750, cmap=my_cmap, norm=norm)
     m.contourf(x, y, subT, 110, cmap=my_cmap, norm=norm)#,norm=norm cmaps.temp_19lev NCV_jaisnd
     d=m.contour(x, y, subT, 110, colors = 'red', linewidths=0.6, levels=0)
-    d1=m.contour(x, y, subMSLP, 70, colors = 'whitesmoke', linewidths=0.5)#, alpha=0.6
-    plt.clabel(d, inline = True, fmt='%.0f℃', fontsize=8)
-    plt.clabel(d1, inline = True, fmt='%.0f', colors='whitesmoke', fontsize=7)#alpha=0.6,
+    d1=m.contour(x, y, subMSLP, 30, colors = 'whitesmoke', linewidths=0.5)#, alpha=0.6
+    plt.clabel(d, inline = True, fmt='%.0f', fontsize=3.3)
+    plt.clabel(d1, inline = True, fmt='%.0f', colors='whitesmoke', fontsize=3.3)#alpha=0.6,
 
 
     skip=slice(None,None,5)
@@ -83,13 +83,13 @@ def plotWTP(file):
                  sizes=dict(emptybarb=0, spacing=0.2, height=0.5),barb_increments=dict(half=2, full=4, flag=20 ),
                  linewidth=0.2, color='black')
 
-    plt.title('GFS 10m Wind & 2m Air Temperature & MSLP\nlnit:' + formatfcit + ' Forecast Hour[' + str(fcst) + '] valid at ' + formatvalid + '\n@myyd & Louis-He',
+    plt.title('GFS 850hpa Wind and Temperature & 500hpa Geopotential Height\nlnit:' + formatfcit + ' Forecast Hour[' + str(fcst) + '] valid at ' + formatvalid + '\n@Myyd & Louis-He',
                   loc='left', fontsize=11)
     m.drawparallels(np.arange(0, 65, 10), labels=[1,0,0,0], fontsize=8, linewidth=0.5,color='dimgrey',dashes=[1,1])
     m.drawmeridians(np.arange(65., 180., 10), labels=[0,0,0,1], fontsize=8, linewidth=0.5,color='dimgrey',dashes=[1,1])
     m.drawcoastlines(linewidth=0.5)
     m.drawstates(linewidth=0.4,color='dimgrey')
-    #m.readshapefile('D:\\shp\\provinces', 'states', drawbounds=True, linewidth=0.5, color='black')
+    #m.readshapefile('/mnt/c/Users/10678/Desktop/GFS/shp/cnhimap', 'states', drawbounds=True, linewidth=0.5, color='black')
     ax2 = fig.add_axes([0.88, 0.11, 0.018, 0.77])
     cbar=mpl.colorbar.ColorbarBase(ax2, cmap=my_cmap, norm=norm, orientation='vertical', drawedges=False)
     cbar.set_ticks(np.linspace(-60,50,23))
@@ -98,7 +98,7 @@ def plotWTP(file):
     #Temperature(℃)
 
     #GFS 10m Wind and 2m Air Temperature\nlnit:00z Nov 04 2017 Forecast Hour[36] valid at 12z Sun,Nov 05 2017 6-hour #ERA Interim 850hpa Wind speed and Temperature & 500hpa Geopotential Height#Streamlines
-    plt.savefig('product/WTP_NA/' + file + '.png', bbox_inches='tight')
+    plt.savefig('product/WTP850/' + file + '.png', bbox_inches='tight')
 
     # delete plot for memory
     del fig
@@ -113,7 +113,7 @@ def initialize():
     os.system('rm -rf product/')
     print('['+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60))+']'+'Erase expired product')
     os.system('mkdir product')
-    os.system('mkdir product/WTP')
+    os.system('mkdir product/WTP850')
     print('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Create product folder')
     f = open('/root/GFS/sysreport/plotreport.txt', 'w+')
     f.close()
