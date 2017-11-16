@@ -18,10 +18,11 @@ utc = 0
 
 # plot the diagram of 850hpa wind +  T + Wind
 def plotWTP(file, areatype):
-    print('AREATYPE:'+areatype)
     # set boundary through areatype
     boundary = ''
-    exec('boundary = ' + areatype)
+    tmpstr = 'boundary = ' + areatype
+    print(tmpstr)
+    exec(tmpstr)
     print('boundary'+boundary)
 
     #read in files
@@ -147,7 +148,6 @@ for i in range(1,nargs):
          if i != nargs-1:
             pic=sys.argv[i+1]
             skip=True
-            print('AREA:' + pic)
       else:
          print ("ERR: unknown arg:",arg)
    else:
