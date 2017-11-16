@@ -12,7 +12,7 @@ def createsh():
                               time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Write script file...\n')
     f = open('/root/GFS/process.sh', 'w+')
     f.write(
-        'python3 main.py\npython3 productinitialize_WTP.py\npython3 productinitialize_WTP_NA.py\n')
+        'python3 main.py\npython3 productinitialize_WTP.py\npython3 productinitialize_WTP_NA.py\npython3 productinitialize_WGP.py\n')
     f.close()
 
 
