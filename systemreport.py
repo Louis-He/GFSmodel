@@ -39,7 +39,31 @@ class sysreport:
         result = result + 'Status of Subsystems:\n'
         result = result + 'Downloading system: ' + sysstatus[1] + '\n'
         result = result + 'Plotting system: ' + sysstatus[2] + '\n'
-        return result
+
+        if sysstatus[0] == 'Running':
+            color = '#55ff00'
+        else:
+            color = '#ff0000'
+        f = open('sysreport.html', 'w+')
+        f.write(
+            '<html>'
+            '<head>'
+            '<title>GFS forecast automatic analyzing System status</title>'
+            '<style>'
+            'h1 { color : ' + color + '; font-size : 28px;}' 
+            '</style>'
+            '</head>'
+            '<body>'
+            '<h1> System Integrity: ' + sysstatus[0] + '</h1>'
+            '<div> Downloading system: ' + sysstatus[1] + '</div>'
+            '<div> Plotting system: ' + sysstatus[2] + '</div>'
+            '</body>'
+            '</html>'
+        )
+        f.close()
+
+        return open(r'sysreport.html', 'r').read()
+        #return result
 
 if __name__ == "__main__":
     app.run()
