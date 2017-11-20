@@ -59,7 +59,7 @@ class sysreport:
             '<body>'
             '<title>GFS forecast automatic analyzing system status</title>'
             '<h1> Status of System </h1>'
-            '<h2> ·' + sysstatus[0] + ' </h2>'
+            '<h2> >>>' + sysstatus[0] + ' </h2>'
             '<subtitle> Status of subsystem: </subtitle>'
             '<div> Downloading system: ' + sysstatus[1] + '</div>'
             '<div> Plotting system: ' + sysstatus[2] + '</div>'
