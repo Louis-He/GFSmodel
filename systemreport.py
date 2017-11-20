@@ -41,7 +41,7 @@ class sysreport:
         result = result + 'Plotting system: ' + sysstatus[2] + '\n'
 
         if sysstatus[0] == 'Running':
-            color = '#55ff00'
+            color = '#00FF7F'
         else:
             color = '#ff0000'
         f = open('sysreport.html', 'w+')
@@ -50,11 +50,17 @@ class sysreport:
             '<head>'
             '<title>GFS forecast automatic analyzing System status</title>'
             '<style>'
-            'h1 { color : ' + color + '; font-size : 28px;}' 
+            'title { font-size : 32px;}' 
+            'h1 { font-size : 24px;}' 
+            'h2 { color : ' + color + '; font-size : 18px;}' 
+            'subtitle { font-size : 22px;}' 
             '</style>'
             '</head>'
             '<body>'
-            '<h1> System Integrity: ' + sysstatus[0] + '</h1>'
+            '<title>GFS forecast automatic analyzing system status</title>'
+            '<h1> Status of System </h1>'
+            '<h2> ·' + sysstatus[0] + ' </h2>'
+            '<subtitle> Status of subsystem: </subtitle>'
             '<div> Downloading system: ' + sysstatus[1] + '</div>'
             '<div> Plotting system: ' + sysstatus[2] + '</div>'
             '</body>'
