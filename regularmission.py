@@ -28,8 +28,12 @@ def isnewmission():
     return False
 
 # main program to update all plots to the latest
+print('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\tPlot System Start\n')
 while True:
     if isnewmission():
+        print('[' + time.strftime('%Y-%m-%d %H:%M:%S',
+                                  time.localtime(time.time() + utc * 60 * 60)) + ']' + '\tPlot System Start\n')
         regular()
     else:
+        print('NO new mission')
         time.sleep(60)
