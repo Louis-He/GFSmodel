@@ -299,6 +299,7 @@ def addmission(filename):
     f.write('python3 plotrain.py --path ' + filename + ' --area CN')
     f.close()
 
+initialize()
 print('[Please Wait]System First Start: Wait for next closest GFS files download time window...')
 print('Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
 while not startmain():
