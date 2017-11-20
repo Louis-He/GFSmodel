@@ -1,5 +1,4 @@
 import sys
-import pygrib
 
 from mpl_toolkits.basemap import Basemap, cm, shiftgrid
 import matplotlib as mpl
@@ -22,18 +21,10 @@ def plotWGP(file, areatype):
     # set boundary through areatype
     boundary = ''
     tmpstr = 'boundary=' + areatype
-
-    '''
-    #NOT OPERATING(python3 bug)
-    print(tmpstr)
-    exec(tmpstr)
-    print(boundary)
-    '''
-
     ldict = locals()
     exec(tmpstr, globals(), ldict)
     boundary = ldict['boundary']
-    print(boundary)
+    #print(boundary)
 
     #read in files
     grbs = pygrib.open('rawfile/' + file)
@@ -71,7 +62,7 @@ def plotWGP(file, areatype):
     del grbs
 
     # generatre basemap
-    m = Basemap(llcrnrlon=boundary[0],llcrnrlat=boundary[1],urcrnrlon=boundary[2],urcrnrlat=boundary[3],projection='lcc',lat_0=boundary[4], lon_0=boundary[5],resolution ='l',area_thresh=1)
+    m = Basemap(llcrnrlon=boundary[0],llcrnrlat=boundary[1],urcrnrlon=boundary[2],urcrnrlat=boundary[3],projection='lcc',lat_0=boundary[4], lon_0=boundary[5],resolution ='l',area_thresh=100)
     lon, lat = np.meshgrid(lons, lats)
     x, y = m(lon, lat)
 
@@ -124,24 +115,6 @@ def plotWGP(file, areatype):
     plt.close(0)
     del subMSLP, subWU, subWV, subT, m, lon, lat, lons, lats, my_cmap, norm, d, d1, cbar, ax, ax2, x, y, skip, analysistime, fcit, formatfcit, timestampfcit, fcst, formatvalid
 
-# run at the beginning of the program
-def initialize():
-
-    os.system('rm -rf product/')
-    print('['+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60))+']'+'Erase expired product')
-    os.system('mkdir product')
-    os.system('mkdir product/WTP')
-    print('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Create product folder')
-    f = open('/root/GFS/sysreport/plotreport.txt', 'w+')
-    f.close()
-    print('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Create system report file...')
-    f = open('/root/GFS/sysreport/errreport.txt', 'w+')
-    f.close()
-    print('[' + time.strftime('%Y-%m-%d %H:%M:%S',
-                              time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Create system error report file...')
-    print('[' + time.strftime('%Y-%m-%d %H:%M:%S',
-                              time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Start to plot...')
-
 #using script file
 #import the file name of rawfile, range of longitude and latitude
 nargs=len(sys.argv)
@@ -163,35 +136,32 @@ for i in range(1,nargs):
    else:
       skip=False
 
-#initialize()
 path = 'rawfile/' + file
 if file[0:3] == 'gfs':
-    #try:
-    plotWGP(file, areatype=pic)
-    print('[Compele Plotting] File:' + file)
-    f = open('/root/GFS/sysreport/plotreport.txt', 'a+')
-    f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
-            file + ' PLOT SUCCESS\n')
-    f.close()
-    f = open('/root/GFS/sysreport/running.txt', 'a+')
-    f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
-            file + ' PLOT SUCCESS\n')
-    f.close()
-    del f
-    '''
-    except:
-        print('[ERR:unknown] File:' + file)
-        f = open('/root/GFS/sysreport/plotreport.txt', 'a+')
+    try:
+        plotWGP(file, areatype=pic)
+        print('[Compele Plotting] File:' + file)
+        f = open('sysreport/plotreport.txt', 'a+')
         f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
-                file + ' PLOT FAILED! PLEASE CHECK\n')
+                file + ' WGP PLOT SUCCESS\n')
         f.close()
-        f = open('/root/GFS/sysreport/errreport.txt', 'a+')
+        f = open('sysreport/running.txt', 'a+')
         f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
-                file + ' PLOT FAILED! PLEASE CHECK!\n')
-        f.close()
-        f = open('/root/GFS/sysreport/running.txt', 'a+')
-        f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
-                file + ' PLOT FAILED! PLEASE CHECK!\n')
+                file + ' WGP PLOT SUCCESS\n')
         f.close()
         del f
-    '''
+    except:
+        print('[ERR:unknown] File:' + file)
+        f = open('sysreport/plotreport.txt', 'a+')
+        f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
+                file + ' WGP PLOT FAILED! PLEASE CHECK\n')
+        f.close()
+        f = open('sysreport/errreport.txt', 'a+')
+        f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
+                file + ' WGP PLOT FAILED! PLEASE CHECK!\n')
+        f.close()
+        f = open('sysreport/running.txt', 'a+')
+        f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
+                file + ' WGP PLOT FAILED! PLEASE CHECK!\n')
+        f.close()
+        del f
