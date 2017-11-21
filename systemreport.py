@@ -28,6 +28,11 @@ def syscheck():
 
     return plotstatus,mainstatus,sysstatus
 
+def getdownloadstatus():
+    f = open('sysreport/sysrealreport.txt')  # Read waitlist mission
+    line = f.readline()
+    return line
+
 urls = (
     '/GFS/sysreport', 'sysreport'
 )
@@ -36,15 +41,26 @@ app = web.application(urls, globals())
 class sysreport:
     def GET(self):
         sysstatus = syscheck()
+        downloadstatus = getdownloadstatus()
         result = 'Status of the system: ' + sysstatus[0] + '\n'
         result = result + 'Status of Subsystems:\n'
         result = result + 'Downloading system: ' + sysstatus[1] + '\n'
         result = result + 'Plotting system: ' + sysstatus[2] + '\n'
 
+        # analyze system integrity
         if sysstatus[0] == 'Running':
-            color = '#00FF7F'
+            Tcolor = '#00FF7F'
         else:
-            color = '#ff0000'
+            Tcolor = '#ff0000'
+
+        # analyze download status
+        if 'In downloading Cycle' in downloadstatus:
+            Dcolor = '#00FF7F'
+        elif sysstatus[1] != 'Running':
+            Dcolor = '#ff0000'
+        else:
+            Dcolor = '#F2F200'
+
         f = open('sysreport.html', 'w+')
         f.write(
             '<html>'
@@ -53,8 +69,9 @@ class sysreport:
             '<style>'
             'title { font-size : 32px;}' 
             'h1 { font-size : 24px;}' 
-            'h2 { color : ' + color + '; font-size : 18px;}' 
-            'subtitle { font-size : 22px;}' 
+            'h2 { color : ' + Tcolor + '; font-size : 18px;}' 
+            'subtitle { font-size : 22px;}'
+            'div download {color : ' + Dcolor + ';}' 
             '</style>'
             '</head>'
             '<body>'
@@ -63,7 +80,8 @@ class sysreport:
             '<h1> ' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())) + ' UTC reporting...</h1>'
             '<h2> >>> ' + sysstatus[0] + ' </h2>'
             '<subtitle> Status of subsystem: </subtitle>'
-            '<div> Downloading system: ' + sysstatus[1] + '</div>'
+            '<download> Downloading system: ' + sysstatus[1] + '</download>'
+            '<download>                      ' + downloadstatus + '</download>'
             '<div> Plotting system: ' + sysstatus[2] + '</div>'
             '</body>'
             '</html>'

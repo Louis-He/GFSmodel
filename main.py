@@ -244,6 +244,9 @@ def mainmethod():
         tmpbool = True
         for i in downloadhour:
             if not isdownload[count] and tmpbool:
+                f = open('sysreport/sysrealreport.txt', 'w+')
+                f.write('In downloading Cycle. Downloading')
+                f.close()
                 tmpbool = downloadfile(downloadhour[count], True)
                 if tmpbool:
                     isdownload[count] = True
@@ -252,10 +255,15 @@ def mainmethod():
         # print(isdownload)
         print('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(
                 time.time() + utc * 60 * 60)) + ']No more new file. Start sleeping cycle...[5 min]')
+        f = open('sysreport/sysrealreport.txt', 'w+')
+        f.write('In downloading Cycle. Sleep for next file')
+        f.close()
         time.sleep(120) # sleep 2 mins for another try
 
     finishtime = time.time() + (-1) * utc * 60 * 60
-
+    f = open('sysreport/sysrealreport.txt', 'w+')
+    f.write('Wait For next download window.')
+    f.close()
     print('*--------------------------------------------*')
     print('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(
                 time.time() + utc * 60 * 60)) + ']Download cycle ends.')
@@ -304,6 +312,9 @@ print('[Please Wait]System First Start: Wait for next closest GFS files download
 print('Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
 while not startmain():
     time.sleep(60)
+    f = open('sysreport/sysrealreport.txt','w+')
+    f.write('Wait For next download window.')
+    f.close()
 # main operation
 scheduler = BlockingScheduler()
 scheduler.add_job(mainmethod, 'interval', seconds = 6 * 60 * 60)
