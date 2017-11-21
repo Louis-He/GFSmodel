@@ -53,20 +53,22 @@ def plotRain(file, areatype):
 
     # extract each data
     subP = Precipitation.values
-    subR = rain.values
-    subS = snow.values
-    subF = freezing.values
-    subI = ice.values
-    # delete unnecessary variables
     del Precipitation
+    subR = rain.values
     del rain
+    subS = snow.values
     del snow
+    subF = freezing.values
     del freezing
+    subI = ice.values
     del ice
+    # delete unnecessary variables
+
     #calculate
     rain1 = subP*(subR+subS+subF+subI)
     snow1 = subP*(subS+subF+subI)
     freezing1 = subP*(subF+subI)
+    del subP, subR, subS, subF, subI
 
     nrain=np.ma.array(rain1,mask=(rain1==0))
     nsnow=np.ma.array(snow1,mask=(snow1==0))
@@ -149,7 +151,7 @@ def plotRain(file, areatype):
     plt.cla
     plt.clf()
     plt.close(0)
-    del subP, subR, subS, subF, subI, m, lon, lat, lons, lats, y1, y2, y3, norm, norm1, norm2, norm3, cbar1, cbar2, cbar3, ax, ax2, ax3, ax4, x, y, analysistime, fcit, formatfcit, timestampfcit, fcst, formatvalid
+    del m, lon, lat, lons, lats, y1, y2, y3, norm, norm1, norm2, norm3, cbar1, cbar2, cbar3, ax, ax2, ax3, ax4, x, y, analysistime, fcit, formatfcit, timestampfcit, fcst, formatvalid
 
 nargs=len(sys.argv)
 skip=False
