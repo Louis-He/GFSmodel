@@ -49,17 +49,17 @@ class sysreport:
 
         # analyze system integrity
         if sysstatus[0] == 'Running':
-            Tcolor = '#00ff7f'
+            Tcolor = '#00fa9a'
         else:
             Tcolor = '#ff0000'
 
         # analyze download status
         if 'In downloading Cycle' in downloadstatus:
-            Dcolor = '#00ff7f'
+            Dcolor = '#00fa9a'
         elif sysstatus[1] != 'Running':
             Dcolor = '#ff0000'
         else:
-            Dcolor = '#f2f200'
+            Dcolor = '#ffd700'
 
         f = open('sysreport.html', 'w+')
         f.write(
@@ -72,6 +72,7 @@ class sysreport:
             'h2 { color : ' + Tcolor + '; font-size : 18px;}' 
             'subtitle { font-size : 22px;}'
             '.download {color : ' + Dcolor + ';}' 
+            'download {color : ' + Dcolor + ';}'
             '</style>'
             '</head>'
             '<body>'
@@ -80,7 +81,7 @@ class sysreport:
             '<h1> ' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())) + ' UTC reporting...</h1>'
             '<h2> >>> ' + sysstatus[0] + ' </h2>'
             '<subtitle> Status of subsystem: </subtitle>'
-            '<div> Downloading system: <p class=\"download\">' + sysstatus[1] + '</p></div>'
+            '<div> Downloading system: <download class=\"download\">' + sysstatus[1] + '</download></div>'
             '<div>                      ' + downloadstatus + '</div>'
             '<div> Plotting system: ' + sysstatus[2] + '</div>'
             '</body>'
