@@ -65,11 +65,12 @@ class sysreport:
         # analyze download status
         if 'In downloading Cycle' in downloadstatus:
             Dcolor = '#32CD32'
-        elif sysstatus[1] != 'Running':
-            Dcolor = '#ff0000'
-            downloadstatus = '[Error]Please Check!'
         else:
             Dcolor = '#ffd700'
+        if sysstatus[1] != 'Running':
+            Dcolor = '#ff0000'
+            downloadstatus = '[Error]Please Check!'
+
 
         # analyze plot status
         if 'working' in sysstatus[3]:
@@ -101,7 +102,6 @@ class sysreport:
             'h1 { font-size : 24px;}' 
             'h2 { color : ' + Tcolor + '; font-size : 22px;}' 
             'subtitle { font-size : 22px;}'
-            '.download {color : ' + Dcolor + ';}' 
             'download {color : ' + Dcolor + ';}'
             'plot {color : ' + Pcolor + ';}'
             'sub1 {color : ' + scolor1 + ';}'
@@ -115,7 +115,7 @@ class sysreport:
             '<h2> >>> ' + sysstatus[0] + ' </h2>'
             '<subtitle> Status of subsystem: </subtitle>'
             '<br><div> Downloading system: <sub1>>>>' + sysstatus[1] + '</sub1></div>'
-            '<div>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Status: <download class=\"download\">' + downloadstatus + '</download></div></br>'
+            '<div>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Status: <download>' + downloadstatus + '</download></div></br>'
             '<br><div> Plotting system: <sub2>>>>' + sysstatus[2] + '</sub2></div>'
             '<div>&emsp;&emsp;&emsp;&emsp;Status: <plot>' + sysstatus[3] + '</plot></div></br>'
             '</body>'
