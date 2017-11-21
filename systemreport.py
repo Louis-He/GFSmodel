@@ -70,6 +70,14 @@ class sysreport:
         else:
             Dcolor = '#ffd700'
 
+        # analyze plot status
+        if 'working' in sysstatus[3]:
+            Pcolor = '#32CD32'
+        elif sysstatus[2] != 'Running':
+            Pcolor = '#ff0000'
+        else:
+            Pcolor = '#ffd700'
+
         # analyze subsystem status
         if sysstatus[1] == 'Running':
             scolor1 = '#32CD32'
@@ -93,6 +101,7 @@ class sysreport:
             'subtitle { font-size : 22px;}'
             '.download {color : ' + Dcolor + ';}' 
             'download {color : ' + Dcolor + ';}'
+            'plot {color : ' + Pcolor + ';}'
             'sub1 {color : ' + scolor1 + ';}'
             'sub2 {color : ' + scolor2 + ';}'
             '</style>'
@@ -106,7 +115,7 @@ class sysreport:
             '<br><div> Downloading system: <sub1>>>>' + sysstatus[1] + '</sub1></div>'
             '<div>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Status: <download class=\"download\">' + downloadstatus + '</download></div></br>'
             '<br><div> Plotting system: <sub2>>>>' + sysstatus[2] + '</sub2></div>'
-            '<div>&emsp;&emsp;&emsp;&emsp;&emsp;Status: ' + sysstatus[3] + '</div></br>'
+            '<div>&emsp;&emsp;&emsp;&emsp;Status: <plot>' + sysstatus[3] + '</plot></div></br>'
             '</body>'
             '</html>'
         )
