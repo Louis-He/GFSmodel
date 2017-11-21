@@ -33,7 +33,7 @@ def plotWTP(file, areatype):
     ldict = locals()
     exec(tmpstr, globals(), ldict)
     boundary = ldict['boundary']
-    print(boundary)
+    #print(boundary)
 
     #read in files
     grbs = pygrib.open('rawfile/' + file)
@@ -125,24 +125,6 @@ def plotWTP(file, areatype):
     plt.clf()
     plt.close(0)
     del subMSLP, subWU, subWV, subT, m, lon, lat, lons, lats, my_cmap, norm, d, d1, cbar, ax, ax2, x, y, skip, analysistime, fcit, formatfcit, timestampfcit, fcst, formatvalid
-
-# run at the beginning of the program
-def initialize():
-
-    os.system('rm -rf product/')
-    print('['+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60))+']'+'Erase expired product')
-    os.system('mkdir product')
-    os.system('mkdir product/WTP')
-    print('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Create product folder')
-    f = open('/root/GFS/sysreport/plotreport.txt', 'w+')
-    f.close()
-    print('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Create system report file...')
-    f = open('/root/GFS/sysreport/errreport.txt', 'w+')
-    f.close()
-    print('[' + time.strftime('%Y-%m-%d %H:%M:%S',
-                              time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Create system error report file...')
-    print('[' + time.strftime('%Y-%m-%d %H:%M:%S',
-                              time.localtime(time.time() + utc * 60 * 60)) + ']' + 'Start to plot...')
 
 nargs=len(sys.argv)
 skip=False
