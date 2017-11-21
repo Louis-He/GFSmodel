@@ -302,9 +302,9 @@ def addmission(filename):
             os.system('rm product/WTPrain/' + i)
             print('delete same product in the previous hour')
     f = open('sysreport/waitlistmission.sh', 'a+')
-    f.write('python3 plotWGP.py --path ' + filename + ' --area CN')
-    f.write('python3 plotWTP.py --path ' + filename + ' --area CN')
-    f.write('python3 plotrain.py --path ' + filename + ' --area CN')
+    f.write('python3 plotWGP.py --path ' + filename + ' --area CN\n')
+    f.write('python3 plotWTP.py --path ' + filename + ' --area CN\n')
+    f.write('python3 plotrain.py --path ' + filename + ' --area CN\n')
     f.close()
 
 initialize()
