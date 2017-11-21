@@ -80,7 +80,7 @@ class sysreport:
             '<h1> ' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())) + ' UTC reporting...</h1>'
             '<h2> >>> ' + sysstatus[0] + ' </h2>'
             '<subtitle> Status of subsystem: </subtitle>'
-            '<div class=\"download\"> Downloading system: ' + sysstatus[1] + '</div>'
+            '<div> Downloading system: <p class=\"download\">' + sysstatus[1] + '</p></div>'
             '<div>                      ' + downloadstatus + '</div>'
             '<div> Plotting system: ' + sysstatus[2] + '</div>'
             '</body>'
