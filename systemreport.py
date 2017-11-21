@@ -10,6 +10,7 @@ def syscheck():
     plotstatus = 'Error, NOT OPEATING!'
     mainstatus = 'Error, NOT OPEATING!'
     sysstatus = 'Error, at least one of the subsystem is NOT OPEATING!'
+    plotstatusdetail = 'No plot mission at this time.'
 
     command = 'ps -ef |grep python3' #check python3 program
     r = os.popen(command)
@@ -26,7 +27,14 @@ def syscheck():
             integrity = True
             sysstatus = 'Running'
 
-    return plotstatus,mainstatus,sysstatus
+        if 'python3 plotWGP.py' in line:
+            plotstatusdetail = 'Geopotential height plotting is working.'
+        elif 'python3 plotWTP.py' in line:
+            plotstatusdetail = 'Ground condition plotting is working.'
+        elif 'python3 plotrain.py' in line:
+            plotstatusdetail = 'Forecast precipitation plotting is working.'
+
+    return plotstatus,mainstatus,sysstatus,plotstatusdetail
 
 def getdownloadstatus():
     f = open('sysreport/sysrealreport.txt')  # Read waitlist mission
@@ -46,6 +54,7 @@ class sysreport:
         result = result + 'Status of Subsystems:\n'
         result = result + 'Downloading system: ' + sysstatus[1] + '\n'
         result = result + 'Plotting system: ' + sysstatus[2] + '\n'
+        result = result + 'Plotting system(Detail): ' + sysstatus[3] + '\n'
 
         # analyze system integrity
         if sysstatus[0] == 'Running':
@@ -96,7 +105,8 @@ class sysreport:
             '<subtitle> Status of subsystem: </subtitle>'
             '<br><div> Downloading system: <sub1>>>>' + sysstatus[1] + '</sub1></div>'
             '<div>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Status: <download class=\"download\">' + downloadstatus + '</download></div></br>'
-            '<div> Plotting system: <sub2>>>>' + sysstatus[2] + '</sub2></div>'
+            '<br><div> Plotting system: <sub2>>>>' + sysstatus[2] + '</sub2></div>'
+            '<div>&emsp;&emsp;&emsp;&emsp;&emsp;Status: ' + sysstatus[3] + '</div></br>'
             '</body>'
             '</html>'
         )
