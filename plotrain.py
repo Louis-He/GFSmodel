@@ -34,7 +34,6 @@ def plotRain(file, areatype):
     Temperature = grbs.select(name='2 metre temperature')[0]
     Precipitation = grbs.select(name='Total Precipitation')[0]
     subP = Precipitation.values
-    del Precipitation
     rain = grbs.select(name='Categorical rain')[0]
     subR = rain.values
     del rain
@@ -51,6 +50,7 @@ def plotRain(file, areatype):
     lats, lons = Precipitation.latlons()
     lats = (lats.T)[0]
     lons = lons[0]
+    del Precipitation
 
     # define the initial forecast hour
     analysistime = Temperature.analDate
