@@ -297,9 +297,9 @@ def addmission(filename):
     files = os.listdir(path)
     for i in files:
         if filename[-4:] == i[-4:]:
-            os.system('rm product/WTP/' + i)
-            os.system('rm product/WGP/' + i)
-            os.system('rm product/WTPrain/' + i)
+            os.system('rm product/WTP/CN' + i + '.png')
+            os.system('rm product/WGP/CN' + i + '.png')
+            os.system('rm product/RAIN/CN' + i + '.png')
             print('delete same product in the previous hour')
     f = open('sysreport/waitlistmission.sh', 'a+')
     f.write('python3 plotWGP.py --path ' + filename + ' --area CN\n')
