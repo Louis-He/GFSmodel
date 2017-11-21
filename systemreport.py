@@ -49,13 +49,13 @@ class sysreport:
 
         # analyze system integrity
         if sysstatus[0] == 'Running':
-            Tcolor = '#008000'
+            Tcolor = '32CD32'
         else:
             Tcolor = '#ff0000'
 
         # analyze download status
         if 'In downloading Cycle' in downloadstatus:
-            Dcolor = '#008000'
+            Dcolor = '#32CD32'
         elif sysstatus[1] != 'Running':
             Dcolor = '#ff0000'
         else:
@@ -63,12 +63,12 @@ class sysreport:
 
         # analyze subsystem status
         if sysstatus[1] == 'Running':
-            scolor1 = '#008000'
+            scolor1 = '#32CD32'
         else:
             scolor1 = '#ff0000'
         # analyze subsystem status
         if sysstatus[2] == 'Running':
-            scolor2 = '#008000'
+            scolor2 = '#32CD32'
         else:
             scolor2 = '#ff0000'
 
