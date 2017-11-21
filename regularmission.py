@@ -27,6 +27,11 @@ def isnewmission():
     f.close()
     return False
 
+# copy latest prduct to HOME model
+def copyfile():
+    os.system('rm -rf /home/model/GFS')
+    os.system('cp -r product/ /home/model/GFS')
+
 # main program to update all plots to the latest
 print('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\tPlot System Start')
 while True:
@@ -34,6 +39,7 @@ while True:
         print('[' + time.strftime('%Y-%m-%d %H:%M:%S',
                                   time.localtime(time.time() + utc * 60 * 60)) + ']' + '\tPlot Cycle Start')
         regular()
+        copyfile()
     else:
         print('NO new mission')
         time.sleep(60)
