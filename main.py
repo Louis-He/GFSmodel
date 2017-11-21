@@ -296,7 +296,7 @@ def addmission(filename):
     path = 'product/WTP/'
     files = os.listdir(path)
     for i in files:
-        if filename[-8:-4] == i[-8:-4]:
+        if filename[-4:] == i[-8:-4]:
             os.system('rm product/WTP/' + i)
             os.system('rm product/WGP/' + i)
             os.system('rm product/RAIN/' + i)
