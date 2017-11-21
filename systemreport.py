@@ -34,7 +34,7 @@ def syscheck():
         elif 'python3 plotrain.py' in line:
             plotstatusdetail = 'Forecast precipitation plotting is working.'
 
-    return mainstatus, plotstatus,sysstatus,plotstatusdetail
+    return sysstatus, mainstatus, plotstatus,plotstatusdetail
 
 def getdownloadstatus():
     f = open('sysreport/sysrealreport.txt')  # Read waitlist mission
