@@ -14,6 +14,7 @@ import color
 if __name__ == "__main__":
     ys=color.temp
 from color import *
+from area import *
 
 utc = 0
 
@@ -22,14 +23,6 @@ def plotWTP(file, areatype):
     # set boundary through areatype
     boundary = ''
     tmpstr = 'boundary=' + areatype
-
-    '''
-    #NOT OPERATING(python3 bug)
-    print(tmpstr)
-    exec(tmpstr)
-    print(boundary)
-    '''
-
     ldict = locals()
     exec(tmpstr, globals(), ldict)
     boundary = ldict['boundary']
