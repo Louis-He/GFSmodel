@@ -61,6 +61,17 @@ class sysreport:
         else:
             Dcolor = '#ffd700'
 
+        # analyze subsystem status
+        if sysstatus[1] == 'Running':
+            scolor1 = '#00fa9a'
+        else:
+            scolor1 = '#ff0000'
+        # analyze subsystem status
+        if sysstatus[2] == 'Running':
+            scolor2 = '#00fa9a'
+        else:
+            scolor2 = '#ff0000'
+
         f = open('sysreport.html', 'w+')
         f.write(
             '<html>'
@@ -69,10 +80,12 @@ class sysreport:
             '<style>'
             'title { font-size : 32px;}' 
             'h1 { font-size : 24px;}' 
-            'h2 { color : ' + Tcolor + '; font-size : 18px;}' 
+            'h2 { color : ' + Tcolor + '; font-size : 20px;}' 
             'subtitle { font-size : 22px;}'
             '.download {color : ' + Dcolor + ';}' 
             'download {color : ' + Dcolor + ';}'
+            'sub1 {color : ' + scolor1 + ';}'
+            'sub2 {color : ' + scolor2 + ';}'
             '</style>'
             '</head>'
             '<body>'
@@ -81,9 +94,10 @@ class sysreport:
             '<h1> ' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())) + ' UTC reporting...</h1>'
             '<h2> >>> ' + sysstatus[0] + ' </h2>'
             '<subtitle> Status of subsystem: </subtitle>'
-            '<div> Downloading system: <download class=\"download\">' + sysstatus[1] + '</download></div>'
-            '<div>                      ' + downloadstatus + '</div>'
-            '<div> Plotting system: ' + sysstatus[2] + '</div>'
+            '<div> Downloading system: <sub1>' + sysstatus[1] + '</sub1></div>'
+            '<div>                      <download class=\"download\">' + downloadstatus + '</download></div>'
+            '<br></br>'
+            '<div> Plotting system: <sub2>' + sysstatus[2] + '</sub2></div>'
             '</body>'
             '</html>'
         )
