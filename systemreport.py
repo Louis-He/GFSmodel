@@ -34,7 +34,7 @@ def syscheck():
         elif 'python3 plotrain.py' in line:
             plotstatusdetail = 'Forecast precipitation plotting is working.'
 
-    return sysstatus, mainstatus, plotstatus,plotstatusdetail
+    return sysstatus, mainstatus, plotstatus, plotstatusdetail
 
 def getdownloadstatus():
     f = open('sysreport/sysrealreport.txt')  # Read waitlist mission
@@ -50,6 +50,7 @@ class sysreport:
     def GET(self):
         sysstatus = syscheck()
         downloadstatus = getdownloadstatus()
+        plotdetail = sysstatus[3]
         result = 'Status of the system: ' + sysstatus[0] + '\n'
         result = result + 'Status of Subsystems:\n'
         result = result + 'Downloading system: ' + sysstatus[1] + '\n'
@@ -77,7 +78,7 @@ class sysreport:
             Pcolor = '#32CD32'
         elif sysstatus[2] != 'Running':
             Pcolor = '#ff0000'
-            sysstatus[3] = '[Error]Please Check!'
+            plotdetail = '[Error]Please Check!'
         else:
             Pcolor = '#ffd700'
 
@@ -117,7 +118,7 @@ class sysreport:
             '<br><div> Downloading system: <sub1>>>>' + sysstatus[1] + '</sub1></div>'
             '<div>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Status: <download>' + downloadstatus + '</download></div></br>'
             '<br><div> Plotting system: <sub2>>>>' + sysstatus[2] + '</sub2></div>'
-            '<div>&emsp;&emsp;&emsp;&emsp;Status: <plot>' + sysstatus[3] + '</plot></div></br>'
+            '<div>&emsp;&emsp;&emsp;&emsp;Status: <plot>' + plotdetail + '</plot></div></br>'
             '</body>'
             '</html>'
         )
