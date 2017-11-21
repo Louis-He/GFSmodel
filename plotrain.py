@@ -33,10 +33,20 @@ def plotRain(file, areatype):
     # extract data from grib file
     Temperature = grbs.select(name='2 metre temperature')[0]
     Precipitation = grbs.select(name='Total Precipitation')[0]
+    subP = Precipitation.values
+    del Precipitation
     rain = grbs.select(name='Categorical rain')[0]
+    subR = rain.values
+    del rain
     snow = grbs.select(name='Categorical snow')[0]
+    subS = snow.values
+    del snow
     freezing = grbs.select(name='Categorical freezing rain')[0]
+    subF = freezing.values
+    del freezing
     ice = grbs.select(name='Categorical ice pellets')[0]
+    subI = ice.values
+    del ice
     # define longitude and latitude
     lats, lons = Precipitation.latlons()
     lats = (lats.T)[0]
@@ -50,19 +60,6 @@ def plotRain(file, areatype):
 
     fcst = Temperature.forecastTime # integer
     formatvalid = time.strftime('%Hz %m %d %Y', time.localtime(timestampfcit + fcst * 60 * 60)) # formatted validtime
-
-    # extract each data
-    subP = Precipitation.values
-    del Precipitation
-    subR = rain.values
-    del rain
-    subS = snow.values
-    del snow
-    subF = freezing.values
-    del freezing
-    subI = ice.values
-    del ice
-    # delete unnecessary variables
 
     #calculate
     rain1 = subP*(subR+subS+subF+subI)
