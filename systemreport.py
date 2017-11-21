@@ -67,6 +67,7 @@ class sysreport:
             Dcolor = '#32CD32'
         elif sysstatus[1] != 'Running':
             Dcolor = '#ff0000'
+            downloadstatus = '[Error]Please Check!'
         else:
             Dcolor = '#ffd700'
 
@@ -75,6 +76,7 @@ class sysreport:
             Pcolor = '#32CD32'
         elif sysstatus[2] != 'Running':
             Pcolor = '#ff0000'
+            sysstatus[3] = '[Error]Please Check!'
         else:
             Pcolor = '#ffd700'
 
