@@ -9,7 +9,7 @@ def syscheck():
 
     plotstatus = 'Error, NOT OPEATING!'
     mainstatus = 'Error, NOT OPEATING!'
-    sysstatus = 'Error, NOT OPEATING!'
+    sysstatus = 'Error, at least one of the subsystem is NOT OPEATING!'
 
     command = 'ps -ef |grep python3' #check python3 program
     r = os.popen(command)
@@ -80,7 +80,7 @@ class sysreport:
             '<style>'
             'title { font-size : 32px;}' 
             'h1 { font-size : 24px;}' 
-            'h2 { color : ' + Tcolor + '; font-size : 20px;}' 
+            'h2 { color : ' + Tcolor + '; font-size : 22px;}' 
             'subtitle { font-size : 22px;}'
             '.download {color : ' + Dcolor + ';}' 
             'download {color : ' + Dcolor + ';}'
@@ -94,9 +94,9 @@ class sysreport:
             '<h1> ' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())) + ' UTC reporting...</h1>'
             '<h2> >>> ' + sysstatus[0] + ' </h2>'
             '<subtitle> Status of subsystem: </subtitle>'
-            '<br><div> Downloading system: <sub1>' + sysstatus[1] + '</sub1></div>'
-            '<div>                      <download class=\"download\">' + downloadstatus + '</download></div></br>'
-            '<div> Plotting system: <sub2>' + sysstatus[2] + '</sub2></div>'
+            '<br><div> Downloading system: <sub1>>>>' + sysstatus[1] + '</sub1></div>'
+            '<div>&emsp&emsp&emsp&emspStatus: <download class=\"download\">' + downloadstatus + '</download></div></br>'
+            '<div> Plotting system: <sub2>>>>' + sysstatus[2] + '</sub2></div>'
             '</body>'
             '</html>'
         )
