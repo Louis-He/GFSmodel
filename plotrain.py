@@ -66,6 +66,7 @@ def plotRain(file, areatype):
     snow1 = subP*(subS+subF+subI)
     freezing1 = subP*(subF+subI)
     del subP, subR, subS, subF, subI
+    print('calculate process')
 
     nrain=np.ma.array(rain1,mask=(rain1==0))
     del rain1
@@ -73,6 +74,8 @@ def plotRain(file, areatype):
     del snow1
     nfreezingice=np.ma.array(freezing1,mask=(freezing1==0))
     del freezing1
+
+    print('generate map')
     # generatre basemap
     m = Basemap(llcrnrlon=boundary[0], llcrnrlat=boundary[1], urcrnrlon=boundary[2], urcrnrlat=boundary[3],
                 projection='lcc', lat_0=boundary[4], lon_0=boundary[5], resolution='l', area_thresh=100)
