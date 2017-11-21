@@ -293,13 +293,13 @@ def startmain():
 
 # add onging mission list
 def addmission(filename):
-    path = 'rawfile/'
+    path = 'product/WTP/'
     files = os.listdir(path)
     for i in files:
-        if filename[-4:] == i[-4:]:
-            os.system('rm product/WTP/CN' + i + '.png')
-            os.system('rm product/WGP/CN' + i + '.png')
-            os.system('rm product/RAIN/CN' + i + '.png')
+        if filename[-8:-4] == i[-8:-4]:
+            os.system('rm product/WTP/' + i)
+            os.system('rm product/WGP/' + i)
+            os.system('rm product/RAIN/' + i)
             print('delete same product in the previous hour')
     f = open('sysreport/waitlistmission.sh', 'a+')
     f.write('python3 plotWGP.py --path ' + filename + ' --area CN\n')
