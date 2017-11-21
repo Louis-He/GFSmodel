@@ -177,19 +177,18 @@ for i in range(1,nargs):
 
 path = 'rawfile/' + file
 if file[0:3] == 'gfs':
-    #try:
-    plotRain(file, areatype=pic)
-    print('[Compele Plotting] File:' + file)
-    f = open('sysreport/plotreport.txt', 'a+')
-    f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
-            file + ' Rain PLOT SUCCESS\n')
-    f.close()
-    f = open('sysreport/running.txt', 'a+')
-    f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
-            file + ' Rain PLOT SUCCESS\n')
-    f.close()
-    del f
-    '''
+    try:
+        plotRain(file, areatype=pic)
+        print('[Compele Plotting] File:' + file)
+        f = open('sysreport/plotreport.txt', 'a+')
+        f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
+                file + ' Rain PLOT SUCCESS\n')
+        f.close()
+        f = open('sysreport/running.txt', 'a+')
+        f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
+                file + ' Rain PLOT SUCCESS\n')
+        f.close()
+        del f
     except:
         print('[ERR:unknown] File:' + file)
         f = open('sysreport/plotreport.txt', 'a+')
@@ -205,4 +204,3 @@ if file[0:3] == 'gfs':
                 file + ' Rain PLOT FAILED! PLEASE CHECK!\n')
         f.close()
         del f
-    '''

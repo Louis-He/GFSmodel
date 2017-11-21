@@ -141,19 +141,18 @@ for i in range(1,nargs):
 #initialize()
 path = 'rawfile/' + file
 if file[0:3] == 'gfs':
-    #try:
-    plotWTP(file, areatype=pic)
-    print('[Compele Plotting] File:' + file)
-    f = open('/root/GFS/sysreport/plotreport.txt', 'a+')
-    f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
-            file + ' PLOT SUCCESS\n')
-    f.close()
-    f = open('/root/GFS/sysreport/running.txt', 'a+')
-    f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
-            file + ' PLOT SUCCESS\n')
-    f.close()
-    del f
-    '''
+    try:
+        plotWTP(file, areatype=pic)
+        print('[Compele Plotting] File:' + file)
+        f = open('/root/GFS/sysreport/plotreport.txt', 'a+')
+        f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
+                file + ' PLOT SUCCESS\n')
+        f.close()
+        f = open('/root/GFS/sysreport/running.txt', 'a+')
+        f.write('[' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + utc * 60 * 60)) + ']' + '\t' +
+                file + ' PLOT SUCCESS\n')
+        f.close()
+        del f
     except:
         print('[ERR:unknown] File:' + file)
         f = open('/root/GFS/sysreport/plotreport.txt', 'a+')
@@ -169,4 +168,3 @@ if file[0:3] == 'gfs':
                 file + ' PLOT FAILED! PLEASE CHECK!\n')
         f.close()
         del f
-    '''
