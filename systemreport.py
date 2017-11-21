@@ -95,7 +95,7 @@ class sysreport:
             '<h2> >>> ' + sysstatus[0] + ' </h2>'
             '<subtitle> Status of subsystem: </subtitle>'
             '<br><div> Downloading system: <sub1>>>>' + sysstatus[1] + '</sub1></div>'
-            '<div>&emsp&emsp&emsp&emspStatus: <download class=\"download\">' + downloadstatus + '</download></div></br>'
+            '<div>&emsp;&emsp;&emsp;&emsp;Status: <download class=\"download\">' + downloadstatus + '</download></div></br>'
             '<div> Plotting system: <sub2>>>>' + sysstatus[2] + '</sub2></div>'
             '</body>'
             '</html>'
