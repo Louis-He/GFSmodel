@@ -96,9 +96,9 @@ def plotRain(file, areatype):
 
     print('contourf')
     #c=plt.contourf(x, y, rt, 750, cmap=my_cmap, norm=norm)
-    plt.contourf(x, y, nrain, 750, cmap=y1, norm=norm)
-    plt.contourf(x, y, nsnow, 750, cmap=y2, norm=norm)
-    plt.contourf(x, y, nfreezingice, 750, cmap=y3, norm=norm)
+    plt.contourf(x, y, nrain, 75, cmap=y1, norm=norm)
+    plt.contourf(x, y, nsnow, 75, cmap=y2, norm=norm)
+    plt.contourf(x, y, nfreezingice, 75, cmap=y3, norm=norm)
     print('STOP')
     #, alpha=0.6
 
