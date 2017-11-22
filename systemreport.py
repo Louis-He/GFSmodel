@@ -8,7 +8,6 @@ def checkplotprocess():
     f = open('sysreport/ongingmission.sh')  # Read waitlist mission
     lines = f.readlines()
     for i in lines:
-        print(i)
         try:
             i = i[i.index('--path ')+len('--path '):i.index(' --area CN')]
             repete = False
@@ -20,8 +19,8 @@ def checkplotprocess():
         except:
             result = 'NO MISSION'
 
-        for i in mission:
-            result = result + i +'\n'
+    for i in mission:
+        result = result + i +'\n'
     return result
 
 def syscheck():
