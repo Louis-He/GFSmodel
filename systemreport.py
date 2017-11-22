@@ -115,6 +115,8 @@ class sysreport:
             scolor2 = '#32CD32'
         else:
             scolor2 = '#ff0000'
+        if plotdetail == 'No plot mission at this time.':
+            detail = 'No mission in waitlist.'
 
         f = open('sysreport.html', 'w+')
         f.write(
