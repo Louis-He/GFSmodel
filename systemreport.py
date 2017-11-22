@@ -2,6 +2,16 @@ import web
 import os
 import time
 
+def checkplotprocess():
+    result = ''
+    f = open('sysreport/ongingmission.sh')  # Read waitlist mission
+    lines = f.readline()
+    for i in lines:
+        j = i.split('\n')[0]
+        j = j[j.index('--path ')+len('--path '):j.index(' --area CN')]
+        result = result + j + '\n'
+    return result
+
 def syscheck():
     integrity = False
     mainpro = False
@@ -50,6 +60,8 @@ class sysreport:
     def GET(self):
         sysstatus = syscheck()
         downloadstatus = getdownloadstatus()
+        detail = checkplotprocess()
+
         plotdetail = sysstatus[3]
         result = 'Status of the system: ' + sysstatus[0] + '\n'
         result = result + 'Status of Subsystems:\n'
@@ -119,6 +131,7 @@ class sysreport:
             '<div>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Status: <download>' + downloadstatus + '</download></div></br>'
             '<br><div> Plotting system: <sub2>>>>' + sysstatus[2] + '</sub2></div>'
             '<div>&emsp;&emsp;&emsp;&emsp;Status: <plot>' + plotdetail + '</plot></div></br>'
+            '<br><div>&emsp;&emsp;&emsp;Working list: <sub2>>>>' + detail + '</sub2></div></br>'
             '</body>'
             '</html>'
         )
