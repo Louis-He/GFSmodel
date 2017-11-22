@@ -3,6 +3,7 @@ import os
 import time
 
 def checkplotprocess():
+    mission = []
     result = ''
     f = open('sysreport/ongingmission.sh')  # Read waitlist mission
     lines = f.readlines()
@@ -10,9 +11,17 @@ def checkplotprocess():
         print(i)
         try:
             i = i[i.index('--path ')+len('--path '):i.index(' --area CN')]
-            result = result + i + '\n'
+            repete = False
+            for j in mission:
+                if i == j:
+                    repete = True
+            if not repete:
+                mission.append(i)
         except:
             result = 'NO MISSION'
+
+        for i in mission:
+            result = result + i +'\n'
     return result
 
 def syscheck():
