@@ -5,7 +5,7 @@ import time
 def checkplotprocess():
     result = ''
     f = open('sysreport/ongingmission.sh')  # Read waitlist mission
-    lines = f.readline()
+    lines = f.readlines()
     for i in lines:
         print(i)
         try:
