@@ -8,8 +8,11 @@ def checkplotprocess():
     lines = f.readline()
     for i in lines:
         j = i.split('\n')[0]
-        j = j[j.index('--path ')+len('--path '):j.index(' --area CN')]
-        result = result + j + '\n'
+        try:
+            j = j[j.index('--path ')+len('--path '):j.index(' --area CN')]
+            result = result + j + '\n'
+        except:
+            result = 'NO MISSION'
     return result
 
 def syscheck():
