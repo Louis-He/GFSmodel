@@ -35,4 +35,4 @@ This is the only thing you need to do to run the whole program. The program will
 ## Future improvement
 1. More plots
 2. Add Himawari-8 satellite images
-3. Add China ground environment monitoring station network **See airchina repository**
+3. Add China ground environment monitoring station network **See [Airchina](https://github.com/Louis-He/airchina) repository**
