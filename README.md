@@ -1,8 +1,12 @@
 # GFSmodel
 This program needs packages as follows:
+
 numpy
+
 pygrib(with packages pygrib needs)
+
 matplotlib
+
 basemap
 
 
