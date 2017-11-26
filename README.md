@@ -1,6 +1,11 @@
 # GFSmodel
 This program is used to download the latest GFS weather model prediction grib2 files and plot weather graphs to help weather forecasters to better analyze the current and future weather.
 
+# Credit and Warning
+Credit @MYYD and @Louis-He
+
+This project and program CANNOT be distributed or modified by ANYONE or ANY ORGANIZATION WITHOUT the permission of the developer.
+
 # Dependence
 This program needs packages as follows:numpy, pygrib(with packages pygrib needs), matplotlib, basemap
 
