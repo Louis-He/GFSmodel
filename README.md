@@ -1,4 +1,4 @@
-# GFSmodel
+# GFSmodel [![](https://img.shields.io/badge/python-3.5-blue.svg)](https://www.python.org/download/releases/3.5/)
 This program is used to download the latest GFS weather model prediction grib2 files and plot weather graphs to help weather forecasters to better analyze the current and future weather.
 
 ## Credit and Warning
