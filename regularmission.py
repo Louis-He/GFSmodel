@@ -18,6 +18,12 @@ def regular():
 
 # determine whether there are new waitlist plots
 def isnewmission():
+    command = 'ps -ef |grep python3'  # check python3 program
+    r = os.popen(command)
+    info = r.readlines()
+    for line in info:
+        if 'python L126_H13.py' in line:
+            return False
     # f = open('/root/qxahz/stations.txt')
     f = open('sysreport/waitlistmission.sh')  # Read waitlist mission
     line = f.readline()
@@ -41,5 +47,5 @@ while True:
         regular()
         copyfile()
     else:
-        print('NO new mission')
+        print('NO new mission or onging mission is in place...')
         time.sleep(60)
