@@ -18,12 +18,12 @@ def regular():
 
 # determine whether there are new waitlist plots
 def isnewmission():
-    command = 'ps -ef |grep python3'  # check python3 program
-    r = os.popen(command)
-    info = r.readlines()
-    for line in info:
-        if 'python L126_H13.py' in line:
-            return False
+    f = open('/root/airchina/status.txt')  # Read waitlist mission
+    line = f.readline()
+    if line != '':
+        f.close()
+        return False
+    f.close()
     # f = open('/root/qxahz/stations.txt')
     f = open('sysreport/waitlistmission.sh')  # Read waitlist mission
     line = f.readline()
