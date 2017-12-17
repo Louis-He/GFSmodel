@@ -35,6 +35,8 @@ def isnewmission():
 
 # copy latest prduct to HOME model
 def copyfile():
+    os.system('rm -rf /root/station_forecast/website/static/images/model/GFS')
+    os.system('cp -r product/ /root/station_forecast/website/static/images/model/GFS')
     os.system('rm -rf /home/model/GFS')
     os.system('cp -r product/ /home/model/GFS')
 
